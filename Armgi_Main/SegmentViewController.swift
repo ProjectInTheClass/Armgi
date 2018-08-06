@@ -11,7 +11,6 @@ import UIKit
 class SegmentViewController: UIViewController {
     
     var selectedUnit:OneUnit?
-    var selectedSubject:String?
    
     @IBOutlet weak var sentencesView: UIView!
     @IBOutlet weak var wordsView: UIView!

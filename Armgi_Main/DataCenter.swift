@@ -16,6 +16,7 @@ class DataCenter{
     var selectedSubject:Int
     var ddayList:[Int]
     var goalData:GoalData
+    var unitList:[OneUnit]
     var templateColor:[String]
     var selectedColor:[Int]
     var collectionViewCellCurrent:Int //MainTableView에 현재 존재하는 셀의 개수를 저장.
@@ -25,6 +26,8 @@ class DataCenter{
         self.selectedSubject = 0
         self.ddayList = []
         self.goalData = GoalData(currentGoalVal: 0)
+        self.unitList = []
+
         self.templateColor = ["#60ADED","#8EFA00","#FFFB00","#FF2600"]
         //순서대로 파란색,초록색,노란색,빨간색
         self.selectedColor = []

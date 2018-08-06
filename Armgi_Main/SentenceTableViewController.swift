@@ -24,7 +24,7 @@ class SentencesCell: UITableViewCell {
     }
 }
 
-class SentenceTableViewController: UITableViewController {
+class SentenceTableViewController: UITableViewController, UITextFieldDelegate{
     
     var selectedUnit:OneUnit?
 
@@ -44,6 +44,13 @@ class SentenceTableViewController: UITableViewController {
     }
 
     // MARK: - Table view data source
+
+    //키보드 완료 버튼 누르면 키보드 숨기기.
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return true
+    }
+    //주변 터치해서 키보드 숨기기.
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections

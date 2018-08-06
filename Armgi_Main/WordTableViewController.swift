@@ -24,7 +24,7 @@ class WordsCell: UITableViewCell {
     }
 }
 
-class WordTableViewController: UITableViewController {
+class WordTableViewController: UITableViewController, UITextFieldDelegate{
     
     var selectedUnit:OneUnit?
 
@@ -45,6 +45,13 @@ class WordTableViewController: UITableViewController {
     }
 
     // MARK: - Table view data source
+
+    //키보드 완료 버튼 누르면 키보드 숨기기.
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return true
+    }
+    //주변 터치해서 키보드 숨기기.
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
@@ -76,7 +83,6 @@ class WordTableViewController: UITableViewController {
             if newKeyword == "" || newExplanation == "" {
                 //빈 텍스트일 때
             } else {
-                //wordData.keywordList.append(newKeyword)
                 selectedUnit?.allWords.insert(Words(keyword: newKeyword, explanation: newExplanation), at: 0)
             }
         }
@@ -93,17 +99,16 @@ class WordTableViewController: UITableViewController {
     }
     */
 
-    /*
-    // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        guard editingStyle == .delete else { return }
+            dataCenter.unitList.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
     }
-    */
+
+    override func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
+        return "삭제"
+    }
+
 
     /*
     // Override to support rearranging the table view.
@@ -129,5 +134,4 @@ class WordTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
 }

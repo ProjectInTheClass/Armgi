@@ -11,13 +11,9 @@ import UIKit
 class MainTableViewCell: UITableViewCell {
 
     @IBOutlet weak var ddayLabel: UILabel! //DdayLabel
-
     @IBOutlet weak var goalStateBar: UIView!
-
     @IBOutlet weak var goalStateBarBack: UIView!
-    
     @IBOutlet weak var goalStateLabel: UILabel!
-    
     @IBOutlet weak var starImage: UIImageView!
 
     override func awakeFromNib() {
@@ -73,11 +69,6 @@ class MainTableViewController: UITableViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-/*        if dataCenter.studyList.count != 0{
-            tableView.backgroundView = nil
-        }else{
-            tableView.backgroundView = noItemsView
-        }*/
         self.tableView.reloadData()
     }
 

@@ -90,6 +90,7 @@ class AddTableViewController: UITableViewController, UITextFieldDelegate, UIColl
         // Dispose of any resources that can be recreated.
     }
 
+//완료 버튼으로 모달창 닫기.
     @IBAction func doneDismiss(_ sender: Any) {
         if let studyTitleInput = studyTitleInput.text{
             if studyTitleInput == "" || Int(stepperValue.value) == 0{
@@ -104,18 +105,19 @@ class AddTableViewController: UITableViewController, UITextFieldDelegate, UIColl
             }
         }
     }
-    //완료 버튼으로 모달창 닫기.
 
+
+//취소 버튼으로 모달창 닫기.
     @IBAction func cancelDismiss(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
-    //취소 버튼으로 모달창 닫기.
 
+
+//키보드 완료 버튼 누르면 키보드 숨기기.
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return true
     }
-    //키보드 완료 버튼 누르면 키보드 숨기기.
 
 /*
      override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
