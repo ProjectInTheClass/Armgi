@@ -12,6 +12,8 @@ class AddTableViewController: UITableViewController, UITextFieldDelegate, UIColl
 
     @IBOutlet weak var collectionView: UICollectionView!
 
+    var collectionViewCellCurrent = 0
+
     //목표량 바 색상 선택
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return dataCenter.templateColor.count
@@ -40,9 +42,11 @@ class AddTableViewController: UITableViewController, UITextFieldDelegate, UIColl
             cell?.layer.borderWidth = 2.0
             preCell?.layer.borderWidth = 0
             preCellIndex = indexPath
-            dataCenter.collectionViewCellCurrent = indexPath.row
+            collectionViewCellCurrent = indexPath.row
         }
+        print(collectionViewCellCurrent)
     }
+
 
     @IBOutlet weak var studyTitleInput: UITextField!
 
@@ -56,8 +60,6 @@ class AddTableViewController: UITableViewController, UITextFieldDelegate, UIColl
         goalValueLabel.text = "\(Int(stepperValue.value))"
     }
 
-    var count:Int = 0
-
     //텍스트 필드 공백시 알림
     let inputAlert = UIAlertController(title:"어이쿠!", message:"학습 주제나 목표량이 제대로 입력되었는지\r\n확인해주세요!", preferredStyle: .alert)
     let inputAlertAction = UIAlertAction(title:"확인", style: .default, handler: nil)
@@ -68,20 +70,15 @@ class AddTableViewController: UITableViewController, UITextFieldDelegate, UIColl
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-
         // 홈 버튼을 누르고 돌아오면 오류메시지 안보이기.
         inputAlert.addAction(inputAlertAction)
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(dismissFunc), name: Notification.Name.UIApplicationWillResignActive, object: nil)
 
+        // 콜렉션 뷰 셀 간격.
         let layout = UICollectionViewFlowLayout()
-
         layout.minimumInteritemSpacing = 20
-        layout.minimumLineSpacing = 20 //?
-
+        layout.minimumLineSpacing = 20 // ?
         collectionView.collectionViewLayout = layout
     }
 
@@ -99,13 +96,11 @@ class AddTableViewController: UITableViewController, UITextFieldDelegate, UIColl
                 dataCenter.studyList.append(studyTitleInput)
                 dataCenter.ddayList.append(findDday())
                 dataCenter.goalData.goalList.append(Float(stepperValue.value))
-                dataCenter.selectedColor.append(dataCenter.collectionViewCellCurrent)
+                dataCenter.selectedColor.append(collectionViewCellCurrent)
                 self.dismiss(animated: true, completion: nil)
-
             }
         }
     }
-
 
 //취소 버튼으로 모달창 닫기.
     @IBAction func cancelDismiss(_ sender: Any) {
@@ -119,14 +114,7 @@ class AddTableViewController: UITableViewController, UITextFieldDelegate, UIColl
         return true
     }
 
-/*
-     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-     self.view.endEditing(true)
-     }
-     //주변 터치하면 키보드 숨기기.
-*/
-
-    //Dday를 구해주는 함수
+//Dday를 구해주는 함수
      func findDday() -> Int{
         let todayDate = Date()
         do {
@@ -155,42 +143,4 @@ class AddTableViewController: UITableViewController, UITextFieldDelegate, UIColl
         }
         return 9999
     }
-
-/*
-    // unwind
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "unwindDone"{
-            guard let MainTableVC = segue.destination as? MainTableViewController else{
-                return
-            }
-            MainTableVC.addNewItem(studyAdd: addStudy, ddayAdd: findDday())
-        }
-    }
-*/
-
-    // MARK: - Table view data source
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
 }

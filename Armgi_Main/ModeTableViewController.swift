@@ -10,7 +10,6 @@ import UIKit
 
 class ModeTableViewController: UITableViewController {
 
-
     override func viewDidLoad() {
         super.viewDidLoad()
         let screenSize: CGRect = UIScreen.main.bounds

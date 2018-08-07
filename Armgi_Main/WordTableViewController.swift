@@ -12,7 +12,8 @@ class WordsCell: UITableViewCell {
 
     @IBOutlet weak var explanationText: UITextView!
     @IBOutlet weak var keywordLabel: UILabel!
-    
+    @IBOutlet weak var starMark: UIImageView!
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -26,19 +27,21 @@ class WordsCell: UITableViewCell {
 
 class WordTableViewController: UITableViewController, UITextFieldDelegate{
     
-    var selectedUnit:OneUnit?
+    var selectedUnit: OneUnit?
+    var delegate: MyArmgiTableViewController?
 
     @IBOutlet weak var selectedSubjectName: UILabel!
     @IBOutlet weak var selectedUnitName: UILabel!
     @IBOutlet weak var newKeyword: UITextField!
     @IBOutlet weak var newExplanation: UITextView!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        selectedSubjectName.text = dataCenter.studyList[dataCenter.selectedSubject]
+
         selectedUnitName.text = selectedUnit?.unitName
     }
 
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -71,10 +74,15 @@ class WordTableViewController: UITableViewController, UITextFieldDelegate{
         guard let wordSet = selectedUnit?.allWords[indexPath.row] else {
             return cell
         }
-        
+
         cell.keywordLabel?.text = wordSet.keyword
         cell.explanationText?.text = wordSet.explanation
-        
+
+        if selectedUnit?.allWords[indexPath.row].starImageFlag == true{
+            cell.starMark.image = UIImage(named: "goalStar")
+        }
+        selectedUnit?.allWords[indexPath.row].starFlag = true
+
         return cell
     }
     
@@ -83,7 +91,7 @@ class WordTableViewController: UITableViewController, UITextFieldDelegate{
             if newKeyword == "" || newExplanation == "" {
                 //빈 텍스트일 때
             } else {
-                selectedUnit?.allWords.insert(Words(keyword: newKeyword, explanation: newExplanation), at: 0)
+                selectedUnit?.allWords.append(Words(keyword: newKeyword, explanation: newExplanation))
             }
         }
         self.newKeyword.text = nil
@@ -91,47 +99,36 @@ class WordTableViewController: UITableViewController, UITextFieldDelegate{
         self.tableView.reloadData()
     }
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        guard editingStyle == .delete else { return }
-            dataCenter.unitList.remove(at: indexPath.row)
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let delete = UITableViewRowAction(style: .destructive, title: "삭제") { (action, indexPath) in
+            self.selectedUnit?.allWords.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+
+        let star = UITableViewRowAction(style: .normal, title: "별표") { (action, indexPath) in
+
+            if self.selectedUnit?.allWords[indexPath.row].starFlag == true{
+                let starCell = self.tableView.cellForRow(at: indexPath) as! WordsCell
+                starCell.starMark.image = UIImage(named: "goalStar")
+                self.selectedUnit?.allWords[indexPath.row].starImageFlag = true
+                self.selectedUnit?.allWords[indexPath.row].starFlag = false
+
+                let starText = "\(self.selectedUnit?.allWords[indexPath.row].keyword)\r\n\(self.selectedUnit?.allWords[indexPath.row].explanation)"
+                self.delegate?.starList.append(starText)
+
+            } else { // 별표 한 번 더 누르면 해제
+                let starCell = self.tableView.cellForRow(at: indexPath) as! WordsCell
+                starCell.starMark.image = nil
+                self.selectedUnit?.allWords[indexPath.row].starImageFlag = false
+                self.selectedUnit?.allWords[indexPath.row].starFlag = true
+            }
+        }
+        star.backgroundColor = UIColor().colorFromHex("#F9C835")
+        return [delete, star]
     }
 
-    override func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
-        return "삭제"
-    }
-
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-  /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        let MainTVC = segue.destination as? MainTableViewController
+        MainTVC?.delegate = self
     }
-    */
 }
