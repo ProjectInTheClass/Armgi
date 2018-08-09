@@ -56,11 +56,7 @@ class MainTableViewController: UITableViewController {
     }
 
     var selectedColor:[Int] = [] // Add에서 선택한 색깔 담음.
-    var delegate:WordTableViewController?
-
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate?.selectedSubjectName.text = dataCenter.studyList[indexPath.section]
-    }
+    var selectedSubject:Int = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,11 +68,9 @@ class MainTableViewController: UITableViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         if dataCenter.studyList.count != 0
         {
             tableView.backgroundView = nil
@@ -89,10 +83,9 @@ class MainTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return 1
     }
-
+    
     //Dday 출력형식 정의
     func ddayReturn(indexPathSection:Int) -> String{
         switch dataCenter.ddayList[indexPathSection] {
@@ -111,15 +104,13 @@ class MainTableViewController: UITableViewController {
         guard let studyCell = cell as? MainTableViewCell else{
             return cell
         }
+
         studyCell.ddayLabel.text = ddayReturn(indexPathSection: indexPath.section)
         studyCell.goalStateBar.backgroundColor = UIColor().colorFromHex(dataCenter.templateColor[dataCenter.selectedColor[indexPath.section]])
 
         let goalVal = dataCenter.goalData.currentGoalVal/dataCenter.goalData.goalList[indexPath.section]
         if goalVal <= 1.0{
             studyCell.goalStateBar.frame.size.width = CGFloat(goalVal*343)
-            //아이폰 사이즈에 따라 343이 아닐 수도 있음.
-            //let cellWidth = ((UIScreen.mainScreen().bounds.width) — 32–30 ) / 3
-
             studyCell.goalStateLabel.text = String(Int(goalVal*100)) + "%"
             if goalVal == 1.0{
                 studyCell.starImage.image = UIImage(named: "goalStar")
@@ -131,7 +122,7 @@ class MainTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section:Int) -> String?{
-        return dataCenter.studyList[section]
+        return dataCenter.studyList[section]?.subjectName
     }
 
     // 셀이 Swipe 액션시 나타나는 것.
@@ -140,23 +131,29 @@ class MainTableViewController: UITableViewController {
         let delete = UITableViewRowAction(style: .destructive, title: "삭제") { (action, indexPath) in
             let deleteAlert = UIAlertController(title:"정말?", message:"학습 목표를 삭제하시겠습니까?\r\n삭제시 복구가 불가능합니다.", preferredStyle: .alert)
             let deleteOk = UIAlertAction(title:"확인", style: .destructive) { (action : UIAlertAction) in
+
+                dataCenter.chosenSubject -= 1
+
                 //Cell에 존재하는 모든 데이터들을 같이 삭제해주어야 한다.
-                dataCenter.studyList.remove(at: indexPath.section)
+                dataCenter.studyList.removeValue(forKey: indexPath.row)
+                print(dataCenter.studyList)
                 dataCenter.ddayList.remove(at: indexPath.section)
                 dataCenter.goalData.goalList.remove(at: indexPath.section)
+
+
                 // Delete the row from the data source
                 let indexSet = IndexSet(arrayLiteral: indexPath.section)
                 tableView.deleteSections(indexSet, with: .automatic)
             }
+
             let deleteCancel = UIAlertAction(title:"취소", style: .cancel, handler:nil)
             deleteAlert.addAction(deleteOk)
             deleteAlert.addAction(deleteCancel)
+
             self.present(deleteAlert, animated: true, completion: nil)
-            // delete item at indexPath
         }
 
         let edit = UITableViewRowAction(style: .normal, title: "수정") { (action, indexPath) in
-
             // edit item at indexPath
         }
 
@@ -164,4 +161,13 @@ class MainTableViewController: UITableViewController {
 
         return [delete, edit]
     }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let ModeVC = segue.destination as? ModeViewController
+        if let selectedIndexPath = self.tableView.indexPathForSelectedRow {
+            ModeVC?.selectedSubject = selectedIndexPath.section
+            print(selectedIndexPath.section)
+        }
+    }
+
 }

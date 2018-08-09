@@ -19,9 +19,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let filePath = docDir.appendingPathComponent(fileName)
         return filePath
     }
-    
+
+    func saveData(){
+        let filePath = getFilePath(withFileName: "dataCenter.dat")
+        NSKeyedArchiver.archiveRootObject(dataCenter, toFile: filePath)
+    }
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+
+        let filePath = getFilePath(withFileName: "dataCenter.dat")
+        let fileManager = FileManager.default
+        if fileManager.fileExists(atPath: filePath) {
+            if let data = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? DataCenter {
+                dataCenter = data
+            }
+        }
+
         return true
     }
 
@@ -31,11 +45,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
-
-        func saveData(){
-            let filePath = getFilePath(withFileName: "dataCenter.dat")
-            NSKeyedArchiver.archiveRootObject(dataCenter, toFile: filePath)
-        }
         saveData()
     }
 
@@ -48,13 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
-
-        func saveData(){
-            let filePath = getFilePath(withFileName: "dataCenter.dat")
-            NSKeyedArchiver.archiveRootObject(dataCenter, toFile: filePath)
-        }
         saveData()
-        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
 

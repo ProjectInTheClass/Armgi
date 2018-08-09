@@ -34,8 +34,7 @@ class SentenceTableViewController: UITableViewController, UITextFieldDelegate{
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        selectedUnitName.text = selectedUnit?.unitName
+
     }
 
     override func didReceiveMemoryWarning() {

@@ -283,7 +283,7 @@
                                     <outlet property="goalStateBarBack" destination="bKr-8v-etc" id="umB-lO-Wgi"/>
                                     <outlet property="goalStateLabel" destination="aJQ-7T-ucO" id="Gc1-xJ-2dw"/>
                                     <outlet property="starImage" destination="Xez-kN-TI2" id="k8h-uk-PnS"/>
-                                    <segue destination="mgw-t8-pRs" kind="show" id="sj9-D5-8vj"/>
+                                    <segue destination="JdE-Fh-1gY" kind="show" id="UIr-aY-SAJ"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -332,7 +332,6 @@
         <!--학습 방식-->
         <scene sceneID="Qkl-5h-udb">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="6lK-h9-Nee" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="mgw-t8-pRs" customClass="ModeTableViewController" customModule="Armgi_Main" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="static" style="plain" separatorStyle="default" rowHeight="184" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Lhm-BA-qer">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -358,9 +357,6 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.96466046554252194" green="0.96466046554252194" blue="0.96466046554252194" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <connections>
-                                            <segue destination="M1o-gf-2EO" kind="show" id="ERZ-e5-tyt"/>
-                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -416,8 +412,9 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="학습 방식" id="Hdj-sh-PB2"/>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6lK-h9-Nee" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3502" y="-531"/>
+            <point key="canvasLocation" x="3921" y="-643"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Gz8-Mh-ybK">
@@ -456,7 +453,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6rp-lf-40Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1641" y="-722"/>
+            <point key="canvasLocation" x="1641" y="-860"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="s23-hw-xwp">
@@ -740,26 +737,29 @@
             </objects>
             <point key="canvasLocation" x="5242" y="134"/>
         </scene>
-        <!--Title-->
+        <!--모드-->
         <scene sceneID="z37-kv-Zka">
             <objects>
-                <viewController id="JdE-Fh-1gY" customClass="ModeTableViewController" customModule="Armgi_Main" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="JdE-Fh-1gY" customClass="ModeViewController" customModule="Armgi_Main" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="b4w-fN-rOS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="shg-3L-jxK">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YrK-mi-IEE">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="216"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="185"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ll-bC-XBs">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="216"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="185"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="25"/>
                                                 <state key="normal" title="단어식/문장식 생성">
                                                     <color key="titleColor" red="0.41568627450980394" green="0.42745098039215684" blue="0.42745098039215684" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
+                                                <connections>
+                                                    <segue destination="M1o-gf-2EO" kind="show" identifier="modeOneSegue" id="pvQ-Cv-KSV"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -771,14 +771,17 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Icm-cW-E5S">
-                                        <rect key="frame" x="0.0" y="216" width="375" height="215"/>
+                                        <rect key="frame" x="0.0" y="185" width="375" height="184"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d2X-ho-vMd">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="215"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="184"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="25"/>
                                                 <state key="normal" title="Quiz 풀기">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <segue destination="M1o-gf-2EO" kind="show" identifier="modeTwoSegue" id="372-dS-2fM"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.71764705882352942" green="0.72941176470588232" blue="0.72941176470588232" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -790,14 +793,17 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fYH-dH-19G">
-                                        <rect key="frame" x="0.0" y="431" width="375" height="216"/>
+                                        <rect key="frame" x="0.0" y="369" width="375" height="185"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="38h-5h-kUI">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="216"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="185"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="25"/>
                                                 <state key="normal" title="오답 노트">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <segue destination="M1o-gf-2EO" kind="show" identifier="modeTrdSegue" id="CnV-cL-p9Y"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.48627450980392156" green="0.49803921568627452" blue="0.50196078431372548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -821,16 +827,16 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="CdI-fI-FuX"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Title" id="80g-o1-IqQ"/>
+                    <navigationItem key="navigationItem" title="모드" id="80g-o1-IqQ"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lXU-gm-EcD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3503" y="143"/>
+            <point key="canvasLocation" x="3502" y="143"/>
         </scene>
         <!--단원-->
         <scene sceneID="lvB-QK-XJv">
             <objects>
-                <tableViewController id="M1o-gf-2EO" customClass="unitTableViewController" customModule="Armgi_Main" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="M1o-gf-2EO" customClass="UnitTableViewController" customModule="Armgi_Main" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="l7i-jD-Fm4">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -905,7 +911,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="urV-NX-nF3" kind="show" id="uhY-cb-cMh"/>
+                                    <segue destination="urV-NX-nF3" kind="show" id="vkk-zs-5Pl"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -937,7 +943,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="sectionIndexBackgroundColor" red="0.47450980390000003" green="0.47450980390000003" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" id="Pzc-8G-UC6">
+                        <view key="tableHeaderView" contentMode="scaleToFill" misplaced="YES" id="Pzc-8G-UC6">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="230"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
@@ -1121,7 +1127,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QIX-vZ-dcb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6337" y="376"/>
+            <point key="canvasLocation" x="6457" y="-296"/>
         </scene>
         <!--Sentence Table View Controller-->
         <scene sceneID="sHt-Qb-6YG">
@@ -1132,7 +1138,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.87058823529411766" green="0.87058823529411766" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="sectionIndexBackgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" id="opP-ah-Gij">
+                        <view key="tableHeaderView" contentMode="scaleToFill" misplaced="YES" id="opP-ah-Gij">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="230"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
@@ -1278,7 +1284,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BFo-RC-IIm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6338" y="-296"/>
+            <point key="canvasLocation" x="6457" y="489"/>
         </scene>
         <!--오답노트-->
         <scene sceneID="rFl-cS-B2H">
@@ -1464,4 +1470,7 @@
         <image name="3" width="256" height="256"/>
         <image name="blank" width="256" height="256"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="CnV-cL-p9Y"/>
+    </inferredMetricsTieBreakers>
 </document>
