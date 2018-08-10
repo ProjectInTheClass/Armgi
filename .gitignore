@@ -91,3 +91,8 @@ fastlane/test_output
 
 
 # End of https://www.gitignore.io/api/xcode,swift
+.DS_Store
+docs/.DS_Store
+docs/img/.DS_Store
+.DS_Store
+docs/.DS_Store
