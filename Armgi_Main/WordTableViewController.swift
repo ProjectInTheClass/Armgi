@@ -70,6 +70,8 @@ class WordTableViewController: UITableViewController, UITextFieldDelegate{
             cell.explanationText?.text = wordSet.explanation
             if wordSet.starImageFlag == true{
                 cell.starMark.image = UIImage(named: "goalStar")
+            } else {
+                cell.starMark.image = nil // 새로 추가한 셀에 자동으로 별이 붙는 걸 해결.
             }
         }
         return cell
@@ -80,7 +82,7 @@ class WordTableViewController: UITableViewController, UITextFieldDelegate{
             if newKeyword == "" || newExplanation == "" {
                 //빈 텍스트일 때
             } else {
-                dataCenter.studyList[selectedSubject]?.unitList[selectedUnit].allWords.append(Words(keyword: newKeyword, explanation: newExplanation))
+                dataCenter.studyList[selectedSubject]?.unitList[selectedUnit].allWords.insert(Words(keyword: newKeyword, explanation: newExplanation), at: 0)
             }
         }
         self.newKeyword.text = nil
@@ -99,17 +101,12 @@ class WordTableViewController: UITableViewController, UITextFieldDelegate{
                 starCell.starMark.image = UIImage(named: "goalStar")
                 dataCenter.studyList[self.selectedSubject]?.unitList[self.selectedUnit].allWords[indexPath.row].starImageFlag = true
                 dataCenter.studyList[self.selectedSubject]?.unitList[self.selectedUnit].allWords[indexPath.row].starFlag = false
-
-                // 두번째 탭에 추가.
-
-
-            } else { // 별표 한 번 더 누르면 해제
+            }
+            else { // 별표 한 번 더 누르면 해제
                 let starCell = self.tableView.cellForRow(at: indexPath) as! WordsCell
                 starCell.starMark.image = nil
                 dataCenter.studyList[self.selectedSubject]?.unitList[self.selectedUnit].allWords[indexPath.row].starImageFlag = false
                 dataCenter.studyList[self.selectedSubject]?.unitList[self.selectedUnit].allWords[indexPath.row].starFlag = true
-
-
             }
         }
         star.backgroundColor = UIColor().colorFromHex("#F9C835")

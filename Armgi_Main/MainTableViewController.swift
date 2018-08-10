@@ -125,6 +125,16 @@ class MainTableViewController: UITableViewController {
         return dataCenter.studyList[section]?.subjectName
     }
 
+//    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+//        if let header = view as? UITableViewHeaderFooterView {
+//            header.backgroundView?.backgroundColor = UIColor.lightGray
+//            header.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+//            header.textLabel?.textAlignment = .center
+//            header.textLabel?.textColor = UIColor.white
+//            // header.heightAnchor
+//        }
+//    }
+
     // 셀이 Swipe 액션시 나타나는 것.
     // 테이블 section 삭제 및 studyList, ddayList 배열에서 제거.
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
@@ -136,7 +146,6 @@ class MainTableViewController: UITableViewController {
 
                 //Cell에 존재하는 모든 데이터들을 같이 삭제해주어야 한다.
                 dataCenter.studyList.removeValue(forKey: indexPath.section) // 신의 한 수
-                print(dataCenter.studyList)
                 dataCenter.ddayList.remove(at: indexPath.section)
                 dataCenter.goalData.goalList.remove(at: indexPath.section)
 
@@ -166,7 +175,6 @@ class MainTableViewController: UITableViewController {
         let ModeVC = segue.destination as? ModeViewController
         if let selectedIndexPath = self.tableView.indexPathForSelectedRow {
             ModeVC?.selectedSubject = selectedIndexPath.section
-            print(selectedIndexPath.section)
         }
     }
 

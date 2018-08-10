@@ -86,7 +86,7 @@ class Study: NSObject, NSCoding {
     }
 
     public func encode(with aCoder: NSCoder) {
-        aCoder.encode(self.subjectName, forKey: "studyName")
+        aCoder.encode(self.subjectName, forKey: "subjectName")
         aCoder.encode(self.chosenUnit, forKey: "chosenUnit")
         aCoder.encode(self.unitList, forKey: "unitList")
     }
@@ -172,7 +172,7 @@ class Words: NSObject, NSCoding{
     }
 
     public required init?(coder aDecoder: NSCoder) {
-        if let keyword = aDecoder.decodeObject(forKey:"keyWord") as? String{
+        if let keyword = aDecoder.decodeObject(forKey:"keyword") as? String{
             self.keyword = keyword
         } else {
             self.keyword = ""
