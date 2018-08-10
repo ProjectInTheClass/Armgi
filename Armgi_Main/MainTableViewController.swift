@@ -135,7 +135,7 @@ class MainTableViewController: UITableViewController {
                 dataCenter.chosenSubject -= 1
 
                 //Cell에 존재하는 모든 데이터들을 같이 삭제해주어야 한다.
-                dataCenter.studyList.removeValue(forKey: indexPath.row)
+                dataCenter.studyList.removeValue(forKey: indexPath.section) // 신의 한 수
                 print(dataCenter.studyList)
                 dataCenter.ddayList.remove(at: indexPath.section)
                 dataCenter.goalData.goalList.remove(at: indexPath.section)

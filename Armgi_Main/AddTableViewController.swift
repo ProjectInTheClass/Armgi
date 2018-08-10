@@ -90,7 +90,9 @@ class AddTableViewController: UITableViewController, UITextFieldDelegate, UIColl
             } else {
                 dataCenter.studyList[dataCenter.chosenSubject] = Study(subjectName: studyTitleInput)
                 dataCenter.chosenSubject += 1
+
                 print(dataCenter.studyList)
+
                 dataCenter.ddayList.append(findDday())
                 dataCenter.goalData.goalList.append(Float(stepperValue.value))
                 dataCenter.selectedColor.append(collectionViewCellCurrent)
