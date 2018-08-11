@@ -17,7 +17,6 @@ class UnitTableViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var quizButton: UIButton!
     @IBOutlet weak var incorrectButton: UIButton!
     
-
     var selectedSubject:Int = 0
     var selectedUnit:Int = 0
 
@@ -119,10 +118,13 @@ class UnitTableViewController: UITableViewController, UITextFieldDelegate {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let SegmentVC = segue.destination as? SegmentViewController
+        let QuizSegmentVC = segue.destination as? QuizSegmentViewController
         SegmentVC?.selectedSubject = selectedSubject
+        QuizSegmentVC?.selectedSubject = selectedSubject
         let selectedIndexPath = self.tableView.indexPathForSelectedRow
         if let indexPath = selectedIndexPath{
             SegmentVC?.selectedUnit = indexPath.row
+            QuizSegmentVC?.selectedUnit = indexPath.row
         }
     }
 }

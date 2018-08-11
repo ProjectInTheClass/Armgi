@@ -45,7 +45,6 @@ class AddTableViewController: UITableViewController, UITextFieldDelegate, UIColl
         }
     }
 
-
     @IBOutlet weak var studyTitleInput: UITextField!
     @IBOutlet weak var endDatePicker: UIDatePicker! // pickerView로 선택한 마감날짜.
     @IBOutlet weak var goalValueLabel: UILabel!
