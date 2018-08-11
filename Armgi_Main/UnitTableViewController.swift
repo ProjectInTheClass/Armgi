@@ -11,6 +11,12 @@ import UIKit
 class UnitTableViewController: UITableViewController, UITextFieldDelegate {
 
     @IBOutlet weak var newUnitName: UITextField!
+    @IBOutlet weak var modeView: UIView!
+    
+    @IBOutlet weak var createButton: UIButton!
+    @IBOutlet weak var quizButton: UIButton!
+    @IBOutlet weak var incorrectButton: UIButton!
+    
 
     var selectedSubject:Int = 0
     var selectedUnit:Int = 0
@@ -20,6 +26,24 @@ class UnitTableViewController: UITableViewController, UITextFieldDelegate {
     }
 
     override func viewDidLoad() {
+//        self.modeView.layer.borderWidth = 1
+//        self.modeView.layer.borderColor = UIColor.darkGray.cgColor
+
+        createButton.layer.shadowColor = UIColor.gray.cgColor
+        createButton.layer.shadowOffset = CGSize(width: 2, height: 2)
+        createButton.layer.shadowRadius = 2
+        createButton.layer.shadowOpacity = 1.0
+
+        quizButton.layer.shadowColor = UIColor.gray.cgColor
+        quizButton.layer.shadowOffset = CGSize(width: 2, height: 2)
+        quizButton.layer.shadowRadius = 2
+        quizButton.layer.shadowOpacity = 1.0
+
+        incorrectButton.layer.shadowColor = UIColor.gray.cgColor
+        incorrectButton.layer.shadowOffset = CGSize(width: 2, height: 2)
+        incorrectButton.layer.shadowRadius = 2
+        incorrectButton.layer.shadowOpacity = 1.0
+
         super.viewDidLoad()
     }
 
