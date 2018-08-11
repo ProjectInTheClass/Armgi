@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UserNotifications
 
 class SettingUserModeTableViewController: UITableViewController {
 
@@ -59,6 +60,36 @@ class SettingUserModeTableViewController: UITableViewController {
             theIncorrectCheck.image = UIImage.init(named: "checkmark")
             starMemory.isSelected = false
             starMemoryCheck.image = UIImage.init(named: "checkmarkoff")
+        }
+        
+        //notification
+        if indexPath.row == 0 {
+            let popUp = UNMutableNotificationContent()
+            popUp.title = "별표친 아이의 과목"
+            popUp.body = "별표친 아이 키워드 : 별표친 아이의 뜻"
+            
+            let starTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+            // 위에는 타임인터벌이고 설정한 시간으로 바꿔야함
+            //            let date = Date(timeIntervalSincNow: 2)
+            //            var dateComponents = Calendar.current.dateComponents([.day, .hour, .minute])
+            //            let calendarTrigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+            //            let request = UNNotificationRequest(identifier: "dateCome", content: popUp, trigger: calendarTrigger)
+            
+            let request = UNNotificationRequest(identifier: "dateCome", content: popUp, trigger: starTrigger)
+            UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+            
+        } else if indexPath.row == 1 {
+            let popUp = UNMutableNotificationContent()
+            popUp.title = "오답의 과목"
+            popUp.body = "오답인 문제"
+            
+            let incorrectTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+            //            let date = Date(timeIntervalSincNow: 2)
+            //            var dateComponents = Calendar.current.dateComponents([.day, .hour, .minute])
+            //            let calendarTrigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+            //            let request = UNNotificationRequest(identifier: "dateCome", content: popUp, trigger: calendarTrigger)
+            let request = UNNotificationRequest(identifier: "dateCome", content: popUp, trigger: incorrectTrigger)
+            UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
         }
     }
     

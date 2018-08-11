@@ -21,6 +21,7 @@ class AddTableViewController: UITableViewController, UITextFieldDelegate, UIColl
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "colorCell", for: indexPath)
+
         cell.backgroundColor = UIColor().colorFromHex(dataCenter.templateColor[indexPath.row])
         //처음 박스를 검은색으로 미리 설정.
         if indexPath.row == 0{
@@ -28,9 +29,13 @@ class AddTableViewController: UITableViewController, UITextFieldDelegate, UIColl
             cell.layer.borderWidth = 2.0
         }
         return cell
-
     }
-
+    
+    //collection view center align
+//    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+//        
+//    }
+    
     //다른 박스 선택시 기존 박스 체크 해제
     var preCellIndex:IndexPath = [0,0]
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -72,6 +77,7 @@ class AddTableViewController: UITableViewController, UITextFieldDelegate, UIColl
         layout.minimumInteritemSpacing = 20
         layout.minimumLineSpacing = 20 // ?
         collectionView.collectionViewLayout = layout
+        
     }
 
     override func didReceiveMemoryWarning() {

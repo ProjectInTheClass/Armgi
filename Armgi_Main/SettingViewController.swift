@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UserNotifications
 
 
 class SettingViewController: UITableViewController {
@@ -16,12 +17,6 @@ class SettingViewController: UITableViewController {
     @IBOutlet weak var userCheck: UIImageView!
     @IBOutlet weak var forgettingCurveMode: UITableViewCell!
     @IBOutlet weak var userSettingMode: UITableViewCell!
-
-    //사용자 입력 모드
-    @IBOutlet weak var starMemory: UITableViewCell!
-    @IBOutlet weak var starMemoryCheck: UIImageView!
-    @IBOutlet weak var theIncorrect: UITableViewCell!
-    @IBOutlet weak var theIncorrectCheck: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,6 +46,20 @@ class SettingViewController: UITableViewController {
             forgettingCurveCheck.image = UIImage.init(named: "checkmark")
             userSettingMode.isSelected = false
             userCheck.image = UIImage.init(named: "checkmarkoff")
+        }
+        
+        //notification
+        if indexPath.row == 2 {
+            
+            let popUp = UNMutableNotificationContent()
+            popUp.title = "과목. 단원"
+            popUp.body = "키워드:뜻"
+            
+            //트리거를 단원키워드 완료 시간으로부터 10분, 3시간, 24시간, 72시간 이렇게 타임 인터벌로 바꾸는 작업 필요.
+            //let forgettingCurveInterval:[Int] = [10*60, 3*60*60, 24*60*60, 72*60*60]
+            let forgetTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 3, repeats: false)
+            let request = UNNotificationRequest(identifier: "dateCome", content: popUp, trigger: forgetTrigger)
+            UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
         }
         
     }

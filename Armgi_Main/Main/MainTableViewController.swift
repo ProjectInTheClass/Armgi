@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UserNotifications
 
 class MainTableViewCell: UITableViewCell {
 
@@ -60,6 +61,9 @@ class MainTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //알림허용
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert,.sound], completionHandler: {didAllow,Error in print(didAllow)})
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -123,6 +127,34 @@ class MainTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section:Int) -> String?{
         return dataCenter.studyList[section]?.subjectName
+    }
+    
+    //테이블뷰 헤더. 색은 bgcolor 바꾸면 됨!!
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView()
+        view.backgroundColor = UIColor.cyan
+        
+        let label = UILabel()
+        label.text = dataCenter.studyList[section]?.subjectName
+        label.frame = CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 40)
+        label.textAlignment = .center
+        
+        view.addSubview(label)
+        return view
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let view = UIView()
+        view.backgroundColor = UIColor.clear
+        return view
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 10
     }
 
 //    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
