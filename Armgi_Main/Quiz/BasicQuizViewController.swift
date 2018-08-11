@@ -20,6 +20,8 @@ class BasicQuizViewController: UIViewController {
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var preButton: UIButton!
     @IBOutlet weak var checkButton: UIButton!
+    
+    @IBOutlet var noDataView: UIView!
 
     var selectedSubject:Int = 0
     var selectedUnit:Int = 0
@@ -29,12 +31,19 @@ class BasicQuizViewController: UIViewController {
         super.viewDidLoad()
         subjectLabel.text = dataCenter.studyList[selectedSubject]?.subjectName
         unitLabel.text = dataCenter.studyList[selectedSubject]?.unitList[selectedUnit].unitName
+
+        if let count = dataCenter.studyList[selectedSubject]?.unitList[selectedUnit].allWords.count {
+            if count == 0 { // 생성된 암기가 없으면..
+                // self.view.isHidden = true
+                self.view = noDataView
+            }
+        }
+
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        print(selectedUnit)
         if let count = dataCenter.studyList[selectedSubject]?.unitList[selectedUnit].allWords.count {
-            if count > 0 {
+            if count > 0 && qIndex < count {
                 questionLabel.text = dataCenter.studyList[selectedSubject]?.unitList[selectedUnit].allWords[qIndex].keyword
             }
         }
@@ -46,13 +55,17 @@ class BasicQuizViewController: UIViewController {
     }
 
     @IBAction func CheckButton(_ sender: Any) {
-        let answer = dataCenter.studyList[selectedSubject]?.unitList[selectedUnit].allWords[qIndex].explanation
-        answerLabel.text = answer
-        if answerTF.text == answer {
-            answerLabel.textColor = UIColor.green
-        } else {
-            answerLabel.textColor = UIColor.red
-            incorrectButton.isHidden = false
+        if let count = dataCenter.studyList[selectedSubject]?.unitList[selectedUnit].allWords.count {
+            if count > 0 {
+                let answer = dataCenter.studyList[selectedSubject]?.unitList[selectedUnit].allWords[qIndex].explanation
+                answerLabel.text = answer
+                if answerTF.text == answer {
+                    answerLabel.textColor = UIColor.green
+                } else {
+                    answerLabel.textColor = UIColor.red
+                    incorrectButton.isHidden = false
+                }
+            }
         }
         starButton.isHidden = false
         preButton.isHidden = false
@@ -71,6 +84,18 @@ class BasicQuizViewController: UIViewController {
         collectionView.scrollToItem(at: indexPath, at: .left, animated: true)
 */
         qIndex += 1
+
+        if let count = dataCenter.studyList[selectedSubject]?.unitList[selectedUnit].allWords.count {
+            if qIndex >= count {
+                print ("암기 퀴즈가 끝났습니다!\r\n목표량이 일 증가합니다.")
+                dataCenter.goalData.currentGoalVal += 1
+
+                if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CelebrateVC") as? CelebrateViewController {
+                    present(vc, animated: true, completion: nil)
+                }
+
+            }
+        }
         answerTF.text = "" // 텍스트 필드 비워주기.
         self.viewWillAppear(true)
     }

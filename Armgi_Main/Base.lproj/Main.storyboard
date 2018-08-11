@@ -619,7 +619,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CUt-PP-Y0d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4748" y="-1056"/>
+            <point key="canvasLocation" x="4359" y="-1700"/>
         </scene>
         <!--Word Table View Controller-->
         <scene sceneID="XhI-Y6-POe">
@@ -814,7 +814,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QIX-vZ-dcb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5801" y="-1410"/>
+            <point key="canvasLocation" x="5164" y="-2051"/>
         </scene>
         <!--Sentence Table View Controller-->
         <scene sceneID="sHt-Qb-6YG">
@@ -971,7 +971,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BFo-RC-IIm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5801" y="-799"/>
+            <point key="canvasLocation" x="5164" y="-1324"/>
         </scene>
         <!--오답노트-->
         <scene sceneID="rFl-cS-B2H">
@@ -1831,6 +1831,7 @@
                         <outlet property="checkButton" destination="X6x-5s-IfM" id="Xk3-EU-JIg"/>
                         <outlet property="incorrectButton" destination="x57-Mw-PFG" id="DPn-24-1SE"/>
                         <outlet property="nextButton" destination="KIb-tQ-abK" id="yW8-pE-Ykk"/>
+                        <outlet property="noDataView" destination="cnr-uH-22e" id="97n-9K-bHf"/>
                         <outlet property="preButton" destination="oeF-Ui-AAT" id="uXe-U3-cpV"/>
                         <outlet property="questionLabel" destination="rLf-nu-r9r" id="fix-oY-3pV"/>
                         <outlet property="starButton" destination="qNl-mp-O70" id="3DH-WY-KSq"/>
@@ -1839,8 +1840,64 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7jN-p2-r3c" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="cnr-uH-22e">
+                    <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="해당 단원에 생성된 암기가 없습니다" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZZa-rB-zdm">
+                            <rect key="frame" x="31" y="140" width="239" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name=".AppleSDGothicNeoI-Regular" family=".Apple SD Gothic NeoI" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <viewLayoutGuide key="safeArea" id="Ad8-OP-HH4"/>
+                </view>
             </objects>
             <point key="canvasLocation" x="5800.8000000000002" y="-129.53523238380811"/>
+        </scene>
+        <!--Celebrate View Controller-->
+        <scene sceneID="qk9-CF-44p">
+            <objects>
+                <viewController storyboardIdentifier="CelebrateVC" id="Djx-NL-t54" customClass="CelebrateViewController" customModule="Armgi_Main" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="evS-gf-Je7">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="finish" translatesAutoresizingMaskIntoConstraints="NO" id="KXs-vh-Djn">
+                                <rect key="frame" x="16" y="40" width="343" height="314"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TRl-Ti-4Pz">
+                                <rect key="frame" x="127" y="564" width="121" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="학습목표로 귀환하기"/>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="퀴즈를 다 풀었습니다" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iyS-kE-TJt">
+                                <rect key="frame" x="116" y="409" width="142" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="목표량이 1 증가합니다!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y33-uz-cPg">
+                                <rect key="frame" x="110" y="449" width="154" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="REW-hu-678"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="vCK-2K-SFh"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yga-Pc-jZm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6576.8000000000002" y="-80.50974512743629"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="yuI-P4-ZJW">
@@ -1880,6 +1937,7 @@
         <image name="blankstar" width="32" height="32"/>
         <image name="checkmark" width="13" height="11"/>
         <image name="checkmarkoff" width="13" height="11"/>
+        <image name="finish" width="512" height="512"/>
         <image name="gear" width="32" height="32"/>
         <image name="list" width="32" height="32"/>
         <image name="nextButton" width="140" height="299"/>
