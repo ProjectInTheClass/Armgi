@@ -1558,7 +1558,7 @@
                                         <color key="titleColor" red="0.41568627450980394" green="0.42745098039215684" blue="0.42745098039215684" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
                                     <connections>
-                                        <segue destination="urV-NX-nF3" kind="show" id="mtV-FL-jQy"/>
+                                        <segue destination="urV-NX-nF3" kind="show" identifier="CreateSegue" id="mtV-FL-jQy"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1zZ-D7-P1F">
@@ -1570,7 +1570,7 @@
                                         <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
                                     <connections>
-                                        <segue destination="Vym-BK-RgR" kind="show" id="VqN-2N-kkq"/>
+                                        <segue destination="Vym-BK-RgR" kind="show" identifier="QuizSegue" id="VqN-2N-kkq"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AF0-vl-c7I">
@@ -1582,7 +1582,7 @@
                                         <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
                                     <connections>
-                                        <segue destination="UXQ-TG-aBd" kind="show" id="owS-DA-Lwv"/>
+                                        <segue destination="UXQ-TG-aBd" kind="show" identifier="IncorrectSegue" id="owS-DA-Lwv"/>
                                     </connections>
                                 </button>
                             </subviews>
@@ -1648,13 +1648,13 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xYk-Ev-if8" userLabel="Sentences View">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <connections>
-                                    <segue destination="fbl-DJ-ygE" kind="embed" id="u0k-hy-pnz"/>
+                                    <segue destination="fbl-DJ-ygE" kind="embed" identifier="toFlipSegue" id="u0k-hy-pnz"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Ci-bG-5PT" userLabel="Words View">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <connections>
-                                    <segue destination="ZSq-kV-GKg" kind="embed" id="p4H-n3-l6o"/>
+                                    <segue destination="ZSq-kV-GKg" kind="embed" identifier="toBasicSegue" id="p4H-n3-l6o"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -1751,18 +1751,6 @@
                                     <action selector="starButton:" destination="ZSq-kV-GKg" eventType="touchUpInside" id="N9k-gP-GM3"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h64-W8-loh">
-                                <rect key="frame" x="16" y="494" width="80" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.57045853140000002" green="0.57047235969999999" blue="0.57046490910000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <state key="normal" title="이전문제">
-                                    <color key="titleColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="PreButton:" destination="ZSq-kV-GKg" eventType="touchUpInside" id="uJW-5z-xNX"/>
-                                </connections>
-                            </button>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pk7-Ga-tw6">
                                 <rect key="frame" x="79" y="221" width="217" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1813,11 +1801,20 @@
                                     <action selector="incorrectButton:" destination="ZSq-kV-GKg" eventType="touchUpInside" id="JXo-Rq-fNw"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KIb-tQ-abK">
-                                <rect key="frame" x="279" y="494" width="80" height="40"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" highlighted="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oeF-Ui-AAT">
+                                <rect key="frame" x="0.0" y="405" width="40" height="80"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.57045853140000002" green="0.57047235969999999" blue="0.57046490910000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="다음문제">
+                                <state key="normal" image="backButton">
+                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="PreButton:" destination="ZSq-kV-GKg" eventType="touchUpInside" id="mU4-xn-oLo"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" highlighted="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KIb-tQ-abK">
+                                <rect key="frame" x="335" y="405" width="40" height="80"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="nextButton">
                                     <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
@@ -1834,7 +1831,7 @@
                         <outlet property="checkButton" destination="X6x-5s-IfM" id="Xk3-EU-JIg"/>
                         <outlet property="incorrectButton" destination="x57-Mw-PFG" id="DPn-24-1SE"/>
                         <outlet property="nextButton" destination="KIb-tQ-abK" id="yW8-pE-Ykk"/>
-                        <outlet property="preButton" destination="h64-W8-loh" id="yhg-IL-Chb"/>
+                        <outlet property="preButton" destination="oeF-Ui-AAT" id="uXe-U3-cpV"/>
                         <outlet property="questionLabel" destination="rLf-nu-r9r" id="fix-oY-3pV"/>
                         <outlet property="starButton" destination="qNl-mp-O70" id="3DH-WY-KSq"/>
                         <outlet property="subjectLabel" destination="V1w-AY-KnG" id="Xtv-L9-dJT"/>
@@ -1878,11 +1875,13 @@
         <image name="1" width="256" height="256"/>
         <image name="2" width="256" height="256"/>
         <image name="3" width="256" height="256"/>
+        <image name="backButton" width="140" height="299"/>
         <image name="blank" width="256" height="256"/>
         <image name="blankstar" width="32" height="32"/>
         <image name="checkmark" width="13" height="11"/>
         <image name="checkmarkoff" width="13" height="11"/>
         <image name="gear" width="32" height="32"/>
         <image name="list" width="32" height="32"/>
+        <image name="nextButton" width="140" height="299"/>
     </resources>
 </document>

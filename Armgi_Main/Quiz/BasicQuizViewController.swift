@@ -32,6 +32,7 @@ class BasicQuizViewController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        print(selectedUnit)
         if let count = dataCenter.studyList[selectedSubject]?.unitList[selectedUnit].allWords.count {
             if count > 0 {
                 questionLabel.text = dataCenter.studyList[selectedSubject]?.unitList[selectedUnit].allWords[qIndex].keyword
@@ -51,12 +52,12 @@ class BasicQuizViewController: UIViewController {
             answerLabel.textColor = UIColor.green
         } else {
             answerLabel.textColor = UIColor.red
-            incorrectButton.isHidden = true
+            incorrectButton.isHidden = false
         }
         starButton.isHidden = false
         preButton.isHidden = false
         nextButton.isHidden = false
-        checkButton.isEnabled = false
+        // checkButton.isEnabled = false
         self.view.endEditing(true)
     }
     
@@ -70,16 +71,19 @@ class BasicQuizViewController: UIViewController {
         collectionView.scrollToItem(at: indexPath, at: .left, animated: true)
 */
         qIndex += 1
+        answerTF.text = "" // 텍스트 필드 비워주기.
+        self.viewWillAppear(true)
     }
 
     @IBAction func PreButton(_ sender: Any) {
         if qIndex > 0 {
             qIndex -= 1
         }
+        answerTF.text = "" // 텍스트 필드 비워주기.
         self.viewWillAppear(true)
     }
-    var flag:Bool = true
 
+    var flag:Bool = true
     @IBAction func starButton(_ sender: Any) {
         if flag == true {
             starButton.setImage(UIImage(named: "star"), for: .normal)
@@ -92,7 +96,6 @@ class BasicQuizViewController: UIViewController {
     
     @IBAction func incorrectButton(_ sender: Any) {
     }
-
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

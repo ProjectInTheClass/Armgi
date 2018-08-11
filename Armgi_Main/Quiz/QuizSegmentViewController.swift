@@ -35,11 +35,11 @@ class QuizSegmentViewController: UIViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toBasicQuiz" {
+        if segue.identifier == "toBasicSegue" {
             let BasicQuiz = segue.destination as? BasicQuizViewController
             BasicQuiz?.selectedSubject = selectedSubject
             BasicQuiz?.selectedUnit = selectedUnit
-        } else if segue.identifier == "toFlipQuiz" {
+        } else if segue.identifier == "toFlipSegue" {
 
         }
     }

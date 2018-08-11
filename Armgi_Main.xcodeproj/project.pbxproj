@@ -89,16 +89,10 @@
 				67291687210971780028E8A4 /* AppDelegate.swift */,
 				6729168B210971780028E8A4 /* Main.storyboard */,
 				6729169D210A00B90028E8A4 /* DataCenter.swift */,
-				6729169B210971FA0028E8A4 /* AddTableViewController.swift */,
-				67291699210971ED0028E8A4 /* MainTableViewController.swift */,
-				67A3083221158272001FBCC4 /* UnitTableViewController.swift */,
-				67A308382117D9CC001FBCC4 /* SegmentViewController.swift */,
-				67A5F115211EC064009EEE0A /* QuizSegmentViewController.swift */,
-				67A3083A2117D9D5001FBCC4 /* WordTableViewController.swift */,
-				67A3085E21182A7B001FBCC4 /* MyArmgiTableViewController.swift */,
-				67A308362117D9C3001FBCC4 /* SentenceTableViewController.swift */,
-				67A5F113211EBD1A009EEE0A /* BasicQuizViewController.swift */,
 				67A308302112FCDF001FBCC4 /* Extensions.swift */,
+				67A5F119211EEABC009EEE0A /* Quiz */,
+				67A5F118211EEA8A009EEE0A /* Create */,
+				67A5F117211EEA49009EEE0A /* Main */,
 				D11328F8211D24AC00FDF89C /* IncorrectViewController.swift */,
 				D11328F4211D230400FDF89C /* SettingUserModeTableViewController.swift */,
 				D11328F5211D230500FDF89C /* SettingViewController.swift */,
@@ -110,6 +104,36 @@
 				672916C5210AFC5D0028E8A4 /* TodoList.txt */,
 			);
 			path = Armgi_Main;
+			sourceTree = "<group>";
+		};
+		67A5F117211EEA49009EEE0A /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				67291699210971ED0028E8A4 /* MainTableViewController.swift */,
+				6729169B210971FA0028E8A4 /* AddTableViewController.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		67A5F118211EEA8A009EEE0A /* Create */ = {
+			isa = PBXGroup;
+			children = (
+				67A3083221158272001FBCC4 /* UnitTableViewController.swift */,
+				67A308382117D9CC001FBCC4 /* SegmentViewController.swift */,
+				67A3083A2117D9D5001FBCC4 /* WordTableViewController.swift */,
+				67A308362117D9C3001FBCC4 /* SentenceTableViewController.swift */,
+				67A3085E21182A7B001FBCC4 /* MyArmgiTableViewController.swift */,
+			);
+			path = Create;
+			sourceTree = "<group>";
+		};
+		67A5F119211EEABC009EEE0A /* Quiz */ = {
+			isa = PBXGroup;
+			children = (
+				67A5F115211EC064009EEE0A /* QuizSegmentViewController.swift */,
+				67A5F113211EBD1A009EEE0A /* BasicQuizViewController.swift */,
+			);
+			path = Quiz;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

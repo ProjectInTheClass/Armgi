@@ -47,7 +47,6 @@ class UnitTableViewController: UITableViewController, UITextFieldDelegate {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        print(selectedUnit)
         self.tableView.reloadData()
     }
 
@@ -117,14 +116,22 @@ class UnitTableViewController: UITableViewController, UITextFieldDelegate {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let SegmentVC = segue.destination as? SegmentViewController
-        let QuizSegmentVC = segue.destination as? QuizSegmentViewController
-        SegmentVC?.selectedSubject = selectedSubject
-        QuizSegmentVC?.selectedSubject = selectedSubject
-        let selectedIndexPath = self.tableView.indexPathForSelectedRow
-        if let indexPath = selectedIndexPath{
-            SegmentVC?.selectedUnit = indexPath.row
-            QuizSegmentVC?.selectedUnit = indexPath.row
+        if segue.identifier == "CreateSegue" {
+            let SegmentVC = segue.destination as? SegmentViewController
+            SegmentVC?.selectedSubject = selectedSubject
+            let selectedIndexPath = self.tableView.indexPathForSelectedRow
+            if let indexPath = selectedIndexPath{
+                SegmentVC?.selectedUnit = indexPath.row
+            }
+        } else if segue.identifier == "QuizSegue" {
+            let QuizSegmentVC = segue.destination as? QuizSegmentViewController
+            QuizSegmentVC?.selectedSubject = selectedSubject
+            let selectedIndexPath = self.tableView.indexPathForSelectedRow
+            if let indexPath = selectedIndexPath{
+                QuizSegmentVC?.selectedUnit = indexPath.row
+            }
+        } else if segue.identifier == "IncorrectSegue" {
+            
         }
     }
 }
