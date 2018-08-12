@@ -29,24 +29,22 @@ class BasicQuizViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        subjectLabel.text = dataCenter.studyList[selectedSubject]?.subjectName
-        unitLabel.text = dataCenter.studyList[selectedSubject]?.unitList[selectedUnit].unitName
+        subjectLabel.text = dataCenter.studyList[selectedSubject].subjectName
+        unitLabel.text = dataCenter.studyList[selectedSubject].unitList[selectedUnit].unitName
 
-        if let count = dataCenter.studyList[selectedSubject]?.unitList[selectedUnit].allWords.count {
-            if count == 0 { // 생성된 암기가 없으면..
-                // self.view.isHidden = true
-                self.view = noDataView
-            }
+        let count = dataCenter.studyList[selectedSubject].unitList[selectedUnit].allWords.count
+        if count == 0 { // 생성된 암기가 없으면..
+            // self.view.isHidden = true
+            self.view = noDataView
         }
-
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        if let count = dataCenter.studyList[selectedSubject]?.unitList[selectedUnit].allWords.count {
-            if count > 0 && qIndex < count {
-                questionLabel.text = dataCenter.studyList[selectedSubject]?.unitList[selectedUnit].allWords[qIndex].keyword
-            }
+        let count = dataCenter.studyList[selectedSubject].unitList[selectedUnit].allWords.count
+        if count > 0 && qIndex < count {
+            questionLabel.text = dataCenter.studyList[selectedSubject].unitList[selectedUnit].allWords[qIndex].keyword
         }
+
         answerLabel.text = ""
         starButton.isHidden = true
         incorrectButton.isHidden = true
@@ -55,16 +53,15 @@ class BasicQuizViewController: UIViewController {
     }
 
     @IBAction func CheckButton(_ sender: Any) {
-        if let count = dataCenter.studyList[selectedSubject]?.unitList[selectedUnit].allWords.count {
-            if count > 0 {
-                let answer = dataCenter.studyList[selectedSubject]?.unitList[selectedUnit].allWords[qIndex].explanation
-                answerLabel.text = answer
-                if answerTF.text == answer {
-                    answerLabel.textColor = UIColor.green
-                } else {
-                    answerLabel.textColor = UIColor.red
-                    incorrectButton.isHidden = false
-                }
+        let count = dataCenter.studyList[selectedSubject].unitList[selectedUnit].allWords.count
+        if count > 0 {
+            let answer = dataCenter.studyList[selectedSubject].unitList[selectedUnit].allWords[qIndex].explanation
+            answerLabel.text = answer
+            if answerTF.text == answer {
+                answerLabel.textColor = UIColor.green
+            } else {
+                answerLabel.textColor = UIColor.red
+                incorrectButton.isHidden = false
             }
         }
         starButton.isHidden = false
@@ -85,15 +82,13 @@ class BasicQuizViewController: UIViewController {
 */
         qIndex += 1
 
-        if let count = dataCenter.studyList[selectedSubject]?.unitList[selectedUnit].allWords.count {
-            if qIndex >= count {
-                print ("암기 퀴즈가 끝났습니다!\r\n목표량이 일 증가합니다.")
-                dataCenter.goalData.currentGoalVal += 1
+        let count = dataCenter.studyList[selectedSubject].unitList[selectedUnit].allWords.count
+        if qIndex >= count {
+            print ("암기 퀴즈가 끝났습니다!\r\n목표량이 일 증가합니다.")
+            dataCenter.goalData.currentGoalVal += 1
 
-                if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CelebrateVC") as? CelebrateViewController {
-                    present(vc, animated: true, completion: nil)
-                }
-
+            if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CelebrateVC") as? CelebrateViewController {
+                present(vc, animated: true, completion: nil)
             }
         }
         answerTF.text = "" // 텍스트 필드 비워주기.
@@ -126,4 +121,5 @@ class BasicQuizViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+
 }

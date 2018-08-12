@@ -90,12 +90,11 @@
 				6729168B210971780028E8A4 /* Main.storyboard */,
 				6729169D210A00B90028E8A4 /* DataCenter.swift */,
 				67A308302112FCDF001FBCC4 /* Extensions.swift */,
-				67A5F119211EEABC009EEE0A /* Quiz */,
-				67A5F118211EEA8A009EEE0A /* Create */,
 				67A5F117211EEA49009EEE0A /* Main */,
-				D11328F8211D24AC00FDF89C /* IncorrectViewController.swift */,
-				D11328F4211D230400FDF89C /* SettingUserModeTableViewController.swift */,
-				D11328F5211D230500FDF89C /* SettingViewController.swift */,
+				67A5F118211EEA8A009EEE0A /* Create */,
+				67A5F119211EEABC009EEE0A /* Quiz */,
+				67CCBA0D2120505F00A10587 /* Incorrect */,
+				67CCBA0E2120508300A10587 /* Setting */,
 				67A30860211C4C14001FBCC4 /* ModeViewController.swift */,
 				6729168E2109717A0028E8A4 /* Assets.xcassets */,
 				672916902109717A0028E8A4 /* LaunchScreen.storyboard */,
@@ -134,6 +133,23 @@
 				67A5F11A211EFA3F009EEE0A /* CelebrateViewController.swift */,
 			);
 			path = Quiz;
+			sourceTree = "<group>";
+		};
+		67CCBA0D2120505F00A10587 /* Incorrect */ = {
+			isa = PBXGroup;
+			children = (
+				D11328F8211D24AC00FDF89C /* IncorrectViewController.swift */,
+			);
+			path = Incorrect;
+			sourceTree = "<group>";
+		};
+		67CCBA0E2120508300A10587 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				D11328F4211D230400FDF89C /* SettingUserModeTableViewController.swift */,
+				D11328F5211D230500FDF89C /* SettingViewController.swift */,
+			);
+			path = Setting;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

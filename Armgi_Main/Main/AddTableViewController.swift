@@ -43,9 +43,9 @@ class AddTableViewController: UITableViewController, UITextFieldDelegate, UIColl
         return UIEdgeInsetsMake(0, CGFloat(edgeInsets), 0, CGFloat(edgeInsets))
     }
     
-    //collection view center align
+//    collection view center align
 //    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-//        
+//
 //    }
     
     //다른 박스 선택시 기존 박스 체크 해제
@@ -80,11 +80,11 @@ class AddTableViewController: UITableViewController, UITextFieldDelegate, UIColl
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         // 홈 버튼을 누르고 돌아오면 오류메시지 안보이기.
         inputAlert.addAction(inputAlertAction)
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(dismissFunc), name: Notification.Name.UIApplicationWillResignActive, object: nil)
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -99,12 +99,13 @@ class AddTableViewController: UITableViewController, UITextFieldDelegate, UIColl
             if studyTitleInput == "" || Int(stepperValue.value) == 0{
                 self.present(inputAlert, animated: true, completion: nil)
             } else {
-                dataCenter.studyList[dataCenter.chosenSubject] = Study(subjectName: studyTitleInput)
-                dataCenter.chosenSubject += 1
 
+                // 추가하는 데이터.
+                dataCenter.studyList.append(Study(subjectName: studyTitleInput))
                 dataCenter.ddayList.append(findDday())
                 dataCenter.goalData.goalList.append(Float(stepperValue.value))
                 dataCenter.selectedColor.append(collectionViewCellCurrent)
+                
                 self.dismiss(animated: true, completion: nil)
             }
         }

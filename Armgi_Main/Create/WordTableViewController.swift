@@ -34,8 +34,8 @@ class WordTableViewController: UITableViewController, UITextFieldDelegate{
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        selectedSubjectName.text = dataCenter.studyList[selectedSubject]?.subjectName
-        selectedUnitName.text = dataCenter.studyList[selectedSubject]?.unitList[selectedUnit].unitName
+        selectedSubjectName.text = dataCenter.studyList[selectedSubject].subjectName
+        selectedUnitName.text = dataCenter.studyList[selectedSubject].unitList[selectedUnit].unitName
     }
     
     override func didReceiveMemoryWarning() {
@@ -54,7 +54,7 @@ class WordTableViewController: UITableViewController, UITextFieldDelegate{
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let oneUnitDataCount = (dataCenter.studyList[selectedSubject]?.unitList[selectedUnit].allWords.count)!
+        let oneUnitDataCount = dataCenter.studyList[selectedSubject].unitList[selectedUnit].allWords.count
         if  oneUnitDataCount > 0 {
             return oneUnitDataCount
         } else {
@@ -64,15 +64,14 @@ class WordTableViewController: UITableViewController, UITextFieldDelegate{
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "keywordSet", for: indexPath) as! WordsCell
-        if let temp = dataCenter.studyList[selectedSubject]?.unitList[selectedUnit].allWords[indexPath.row] {
-            let wordSet = temp
-            cell.keywordLabel?.text = wordSet.keyword
-            cell.explanationText?.text = wordSet.explanation
-            if wordSet.starImageFlag == true{
-                cell.starMark.image = UIImage(named: "goalStar")
-            } else {
-                cell.starMark.image = nil // 새로 추가한 셀에 자동으로 별이 붙는 걸 해결.
-            }
+
+        let wordSet = dataCenter.studyList[selectedSubject].unitList[selectedUnit].allWords[indexPath.row]
+        cell.keywordLabel?.text = wordSet.keyword
+        cell.explanationText?.text = wordSet.explanation
+        if wordSet.starImageFlag == true{
+            cell.starMark.image = UIImage(named: "goalStar")
+        } else {
+            cell.starMark.image = nil // 새로 추가한 셀에 자동으로 별이 붙는 걸 해결.
         }
         return cell
     }
@@ -82,7 +81,7 @@ class WordTableViewController: UITableViewController, UITextFieldDelegate{
             if newKeyword == "" || newExplanation == "" {
                 //빈 텍스트일 때
             } else {
-                dataCenter.studyList[selectedSubject]?.unitList[selectedUnit].allWords.insert(Words(keyword: newKeyword, explanation: newExplanation), at: 0)
+                dataCenter.studyList[selectedSubject].unitList[selectedUnit].allWords.insert(Words(keyword: newKeyword, explanation: newExplanation), at: 0)
             }
         }
         self.newKeyword.text = nil
@@ -92,21 +91,21 @@ class WordTableViewController: UITableViewController, UITextFieldDelegate{
 
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let delete = UITableViewRowAction(style: .destructive, title: "삭제") { (action, indexPath) in
-            dataCenter.studyList[self.selectedSubject]?.unitList[self.selectedUnit].allWords.remove(at: indexPath.row)
+            dataCenter.studyList[self.selectedSubject].unitList[self.selectedUnit].allWords.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
         let star = UITableViewRowAction(style: .normal, title: "별표") { (action, indexPath) in
-            if dataCenter.studyList[self.selectedSubject]?.unitList[self.selectedUnit].allWords[indexPath.row].starFlag == true {
+            if dataCenter.studyList[self.selectedSubject].unitList[self.selectedUnit].allWords[indexPath.row].starFlag == true {
                 let starCell = self.tableView.cellForRow(at: indexPath) as! WordsCell
                 starCell.starMark.image = UIImage(named: "goalStar")
-                dataCenter.studyList[self.selectedSubject]?.unitList[self.selectedUnit].allWords[indexPath.row].starImageFlag = true
-                dataCenter.studyList[self.selectedSubject]?.unitList[self.selectedUnit].allWords[indexPath.row].starFlag = false
+                dataCenter.studyList[self.selectedSubject].unitList[self.selectedUnit].allWords[indexPath.row].starImageFlag = true
+                dataCenter.studyList[self.selectedSubject].unitList[self.selectedUnit].allWords[indexPath.row].starFlag = false
             }
             else { // 별표 한 번 더 누르면 해제
                 let starCell = self.tableView.cellForRow(at: indexPath) as! WordsCell
                 starCell.starMark.image = nil
-                dataCenter.studyList[self.selectedSubject]?.unitList[self.selectedUnit].allWords[indexPath.row].starImageFlag = false
-                dataCenter.studyList[self.selectedSubject]?.unitList[self.selectedUnit].allWords[indexPath.row].starFlag = true
+                dataCenter.studyList[self.selectedSubject].unitList[self.selectedUnit].allWords[indexPath.row].starImageFlag = false
+                dataCenter.studyList[self.selectedSubject].unitList[self.selectedUnit].allWords[indexPath.row].starFlag = true
             }
         }
         star.backgroundColor = UIColor().colorFromHex("#F9C835")

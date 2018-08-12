@@ -63,10 +63,11 @@ class MainTableViewController: UITableViewController {
         super.viewDidLoad()
         
         //알림허용
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert,.sound], completionHandler: {didAllow,Error in print(didAllow)})
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert,.sound], completionHandler: { didAllow,Error in print(didAllow) })
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        print(dataCenter.studyList)
         self.tableView.reloadData()
     }
 
@@ -74,6 +75,7 @@ class MainTableViewController: UITableViewController {
         super.didReceiveMemoryWarning()
     }
 
+    // 화면에 noData를 띄울지 결정.
     override func numberOfSections(in tableView: UITableView) -> Int {
         if dataCenter.studyList.count != 0
         {
@@ -102,6 +104,7 @@ class MainTableViewController: UITableViewController {
         }
     }
 
+    // 셀 만들기.
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "studyCell", for: indexPath)
 
@@ -125,37 +128,39 @@ class MainTableViewController: UITableViewController {
         return studyCell
     }
 
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section:Int) -> String?{
-        return dataCenter.studyList[section]?.subjectName
-    }
-    
+//    override func tableView(_ tableView: UITableView, titleForHeaderInSection section:Int) -> String?{
+//        return dataCenter.studyList[section]?.subjectName
+//    }
+
     //테이블뷰 헤더. 색은 bgcolor 바꾸면 됨!!
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = UIView()
-        view.backgroundColor = UIColor.cyan
-        
+        view.backgroundColor = UIColor().colorFromHex("#7285A5")
+
         let label = UILabel()
-        label.text = dataCenter.studyList[section]?.subjectName
+        label.text = dataCenter.studyList[section].subjectName
+        label.textColor = UIColor.white
         label.frame = CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 40)
         label.textAlignment = .center
-        
+
         view.addSubview(label)
         return view
     }
-    
+
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 40
     }
-    
-    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let view = UIView()
-        view.backgroundColor = UIColor.clear
-        return view
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 10
-    }
+
+
+//    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+//        let view = UIView()
+//        view.backgroundColor = UIColor.clear
+//        return view
+//    }
+//    
+//    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+//        return 10
+//    }
 
 //    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
 //        if let header = view as? UITableViewHeaderFooterView {
@@ -174,13 +179,11 @@ class MainTableViewController: UITableViewController {
             let deleteAlert = UIAlertController(title:"정말?", message:"학습 목표를 삭제하시겠습니까?\r\n삭제시 복구가 불가능합니다.", preferredStyle: .alert)
             let deleteOk = UIAlertAction(title:"확인", style: .destructive) { (action : UIAlertAction) in
 
-                dataCenter.chosenSubject -= 1
-
                 //Cell에 존재하는 모든 데이터들을 같이 삭제해주어야 한다.
-                dataCenter.studyList.removeValue(forKey: indexPath.section) // 신의 한 수
+                dataCenter.studyList.remove(at: indexPath.section) // 신의 한 수
                 dataCenter.ddayList.remove(at: indexPath.section)
                 dataCenter.goalData.goalList.remove(at: indexPath.section)
-
+                dataCenter.selectedColor.remove(at:indexPath.section)
 
                 // Delete the row from the data source
                 let indexSet = IndexSet(arrayLiteral: indexPath.section)

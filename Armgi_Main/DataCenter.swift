@@ -12,17 +12,15 @@ var dataCenter:DataCenter = DataCenter()
 
 class DataCenter: NSObject, NSCoding{
 
-    var studyList:[Int:Study]
-    var chosenSubject:Int
+    var studyList:[Study]
     var ddayList:[Int]
     var goalData:GoalData
     var selectedColor:[Int]
 
     var templateColor:[String]
 
-    override init(){
-        self.studyList = [:]
-        self.chosenSubject = 0
+    override init() {
+        self.studyList = []
         self.ddayList = []
         self.goalData = GoalData(currentGoalVal: 0)
         self.selectedColor = []
@@ -33,7 +31,6 @@ class DataCenter: NSObject, NSCoding{
 
     public func encode(with aCoder: NSCoder) {
         aCoder.encode(self.studyList, forKey: "studyList")
-        aCoder.encode(self.chosenSubject, forKey: "chosenSubject")
         aCoder.encode(self.ddayList, forKey: "ddayList")
         aCoder.encode(self.goalData, forKey: "goalData")
         aCoder.encode(self.selectedColor, forKey: "selectedColor")
@@ -41,15 +38,10 @@ class DataCenter: NSObject, NSCoding{
     }
 
     public required init?(coder aDecoder: NSCoder) {
-        if let studyList = aDecoder.decodeObject(forKey:"studyList") as? [Int:Study]{
+        if let studyList = aDecoder.decodeObject(forKey:"studyList") as? [Study]{
             self.studyList = studyList
         } else {
-            self.studyList = [:]
-        }
-        if let chosenSubject = aDecoder.decodeObject(forKey:"chosenSubject") as? Int{
-            self.chosenSubject = chosenSubject
-        } else {
-            self.chosenSubject = 0
+            self.studyList = []
         }
         if let ddayList = aDecoder.decodeObject(forKey:"ddayList") as? [Int]{
             self.ddayList = ddayList

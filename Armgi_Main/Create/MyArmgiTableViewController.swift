@@ -34,15 +34,12 @@ class MyArmgiTableViewController: UITableViewController {
 
     // 시한 폭탄 같은 존재.
     override func viewWillAppear(_ animated: Bool) {
-        for i in 0 ..< dataCenter.studyList.count{
-            for j in 0 ..< dataCenter.studyList[i]!.unitList.count {
-                for k in 0 ..< dataCenter.studyList[i]!.unitList[j].allWords.count{
-                    if dataCenter.studyList[i]!.unitList[j].allWords[k].starFlag == false {
+        for i in 0 ..< dataCenter.studyList.count {
+            for j in 0 ..< dataCenter.studyList[i].unitList.count {
+                for k in 0 ..< dataCenter.studyList[i].unitList[j].allWords.count {
+                    if dataCenter.studyList[i].unitList[j].allWords[k].starFlag == false {
                         // 별표 체크가 되었다면 false가 되있는 상태.
-                        // print(dataCenter.studyList[i]!.unitList[j].allWords[k].keyword)
-                        starList.append("\(dataCenter.studyList[i]!.unitList[j].allWords[k].keyword)\r\n\(dataCenter.studyList[i]!.unitList[j].allWords[k].explanation)")
-
-                        // print(starList)
+                        starList.append("\(dataCenter.studyList[i].unitList[j].allWords[k].keyword)\r\n\(dataCenter.studyList[i].unitList[j].allWords[k].explanation)")
                     }
                 }
             }
