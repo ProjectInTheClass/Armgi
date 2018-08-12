@@ -12,7 +12,6 @@ class UnitTableViewController: UITableViewController, UITextFieldDelegate {
 
     @IBOutlet weak var newUnitName: UITextField!
     @IBOutlet weak var modeView: UIView!
-    
     @IBOutlet weak var createButton: UIButton!
     @IBOutlet weak var quizButton: UIButton!
     @IBOutlet weak var incorrectButton: UIButton!
@@ -47,6 +46,7 @@ class UnitTableViewController: UITableViewController, UITextFieldDelegate {
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        print(selectedSubject)
         self.tableView.reloadData()
     }
 
@@ -72,13 +72,10 @@ class UnitTableViewController: UITableViewController, UITextFieldDelegate {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "unitCells", for: indexPath)
         cell.textLabel?.text = dataCenter.studyList[selectedSubject].unitList[indexPath.row].unitName
-        //let unitCount = dataCenter.studyList[selectedSubject]?.unitList.count
-        //if unitCount! > 0 {
+
         let unit = dataCenter.studyList[selectedSubject].unitList[indexPath.row]
         cell.detailTextLabel?.text = "\(unit.allWords.count) , \(unit.allSentences.count)"
-//        } else {
-//            cell.detailTextLabel?.text = "0"
-//        }
+
         return cell
     }
 
@@ -88,9 +85,7 @@ class UnitTableViewController: UITableViewController, UITextFieldDelegate {
             if newUnit == "" {
                 return
             } else {
-                // let chosenUnit = dataCenter.studyList[selectedSubject]?.chosenUnit
                 dataCenter.studyList[selectedSubject].unitList.append(OneUnit(unitName: newUnit))
-                // dataCenter.studyList[selectedSubject]?.chosenUnit += 1
             }
         }
         self.newUnitName.text = nil

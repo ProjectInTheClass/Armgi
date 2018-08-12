@@ -21,7 +21,6 @@
 		67A308392117D9CC001FBCC4 /* SegmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A308382117D9CC001FBCC4 /* SegmentViewController.swift */; };
 		67A3083B2117D9D5001FBCC4 /* WordTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A3083A2117D9D5001FBCC4 /* WordTableViewController.swift */; };
 		67A3085F21182A7B001FBCC4 /* MyArmgiTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A3085E21182A7B001FBCC4 /* MyArmgiTableViewController.swift */; };
-		67A30861211C4C14001FBCC4 /* ModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A30860211C4C14001FBCC4 /* ModeViewController.swift */; };
 		67A5F114211EBD1A009EEE0A /* BasicQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A5F113211EBD1A009EEE0A /* BasicQuizViewController.swift */; };
 		67A5F116211EC064009EEE0A /* QuizSegmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A5F115211EC064009EEE0A /* QuizSegmentViewController.swift */; };
 		67A5F11B211EFA3F009EEE0A /* CelebrateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A5F11A211EFA3F009EEE0A /* CelebrateViewController.swift */; };
@@ -47,7 +46,6 @@
 		67A308382117D9CC001FBCC4 /* SegmentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentViewController.swift; sourceTree = "<group>"; };
 		67A3083A2117D9D5001FBCC4 /* WordTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordTableViewController.swift; sourceTree = "<group>"; };
 		67A3085E21182A7B001FBCC4 /* MyArmgiTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyArmgiTableViewController.swift; sourceTree = "<group>"; };
-		67A30860211C4C14001FBCC4 /* ModeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeViewController.swift; sourceTree = "<group>"; };
 		67A5F113211EBD1A009EEE0A /* BasicQuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicQuizViewController.swift; sourceTree = "<group>"; };
 		67A5F115211EC064009EEE0A /* QuizSegmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizSegmentViewController.swift; sourceTree = "<group>"; };
 		67A5F11A211EFA3F009EEE0A /* CelebrateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CelebrateViewController.swift; sourceTree = "<group>"; };
@@ -95,7 +93,6 @@
 				67A5F119211EEABC009EEE0A /* Quiz */,
 				67CCBA0D2120505F00A10587 /* Incorrect */,
 				67CCBA0E2120508300A10587 /* Setting */,
-				67A30860211C4C14001FBCC4 /* ModeViewController.swift */,
 				6729168E2109717A0028E8A4 /* Assets.xcassets */,
 				672916902109717A0028E8A4 /* LaunchScreen.storyboard */,
 				672916932109717A0028E8A4 /* Info.plist */,
@@ -234,7 +231,6 @@
 				D11328F9211D24AC00FDF89C /* IncorrectViewController.swift in Sources */,
 				67A308372117D9C4001FBCC4 /* SentenceTableViewController.swift in Sources */,
 				67A5F11B211EFA3F009EEE0A /* CelebrateViewController.swift in Sources */,
-				67A30861211C4C14001FBCC4 /* ModeViewController.swift in Sources */,
 				67A3085F21182A7B001FBCC4 /* MyArmgiTableViewController.swift in Sources */,
 				6729169E210A00B90028E8A4 /* DataCenter.swift in Sources */,
 				67A5F114211EBD1A009EEE0A /* BasicQuizViewController.swift in Sources */,

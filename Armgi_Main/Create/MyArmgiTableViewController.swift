@@ -28,12 +28,16 @@ class MyArmgiTableViewController: UITableViewController {
 
     var starList:[String] = []
 
+    @IBOutlet weak var randomTV: UITextView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
 
     // 시한 폭탄 같은 존재.
     override func viewWillAppear(_ animated: Bool) {
+
+        // 중요 표시한 모든 암기들을 보여준다.
         for i in 0 ..< dataCenter.studyList.count {
             for j in 0 ..< dataCenter.studyList[i].unitList.count {
                 for k in 0 ..< dataCenter.studyList[i].unitList[j].allWords.count {
@@ -44,6 +48,13 @@ class MyArmgiTableViewController: UITableViewController {
                 }
             }
         }
+
+        // 랜덤으로 암기를 하나 선정해서 보여준다. (날마다 바뀌도록 하려면 How?)
+        if starList.count > 0 {
+            let randNum:UInt32 = arc4random_uniform(UInt32(starList.count))
+            randomTV.text = starList[Int(randNum)]
+        }
+
         self.tableView.reloadData()
     }
 

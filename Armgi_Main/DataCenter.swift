@@ -22,7 +22,7 @@ class DataCenter: NSObject, NSCoding{
     override init() {
         self.studyList = []
         self.ddayList = []
-        self.goalData = GoalData(currentGoalVal: 0)
+        self.goalData = GoalData()
         self.selectedColor = []
 
         self.templateColor = ["#60ADED","#8EFA00","#FFFB00","#FF2600"]
@@ -51,7 +51,7 @@ class DataCenter: NSObject, NSCoding{
         if let goalData = aDecoder.decodeObject(forKey:"goalData") as? GoalData{
             self.goalData = goalData
         } else {
-            self.goalData = GoalData(currentGoalVal: 0)
+            self.goalData = GoalData()
         }
         if let selectedColor = aDecoder.decodeObject(forKey:"selectedColor") as? [Int]{
             self.selectedColor = selectedColor
@@ -189,11 +189,11 @@ class Words: NSObject, NSCoding{
 
 class GoalData: NSObject, NSCoding {
     var goalList:[Float]
-    var currentGoalVal:Float
+    var currentGoalVal:[Float]
 
-    init(currentGoalVal:Float) {
+    override init() {
         self.goalList = []
-        self.currentGoalVal = currentGoalVal
+        self.currentGoalVal = []
     }
 
     public func encode(with aCoder: NSCoder) {
@@ -202,15 +202,15 @@ class GoalData: NSObject, NSCoding {
     }
 
     public required init?(coder aDecoder: NSCoder) {
-        if let goalList = aDecoder.decodeObject(forKey:"goalList") as? [Float]{
+        if let goalList = aDecoder.decodeObject(forKey:"goalList") as? [Float] {
             self.goalList = goalList
         } else {
             self.goalList = []
         }
-        if let currentGoalVal = aDecoder.decodeObject(forKey:"currentGoalVal") as? Float{
+        if let currentGoalVal = aDecoder.decodeObject(forKey:"currentGoalVal") as? [Float] {
             self.currentGoalVal = currentGoalVal
         } else {
-            self.currentGoalVal = 0
+            self.currentGoalVal = []
         }
     }
 }

@@ -105,7 +105,8 @@ class AddTableViewController: UITableViewController, UITextFieldDelegate, UIColl
                 dataCenter.ddayList.append(findDday())
                 dataCenter.goalData.goalList.append(Float(stepperValue.value))
                 dataCenter.selectedColor.append(collectionViewCellCurrent)
-                
+                dataCenter.goalData.currentGoalVal.append(Float(0))
+
                 self.dismiss(animated: true, completion: nil)
             }
         }

@@ -85,11 +85,13 @@ class BasicQuizViewController: UIViewController {
         let count = dataCenter.studyList[selectedSubject].unitList[selectedUnit].allWords.count
         if qIndex >= count {
             print ("암기 퀴즈가 끝났습니다!\r\n목표량이 일 증가합니다.")
-            dataCenter.goalData.currentGoalVal += 1
-
+            dataCenter.goalData.currentGoalVal[selectedSubject] += 1
+            checkButton.isEnabled = false
+            /*
             if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CelebrateVC") as? CelebrateViewController {
                 present(vc, animated: true, completion: nil)
             }
+            */
         }
         answerTF.text = "" // 텍스트 필드 비워주기.
         self.viewWillAppear(true)

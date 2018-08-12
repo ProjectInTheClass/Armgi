@@ -536,6 +536,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="나의 암기" id="Dsh-Jo-oNy"/>
+                    <connections>
+                        <outlet property="randomTV" destination="4v4-3l-bBE" id="Cjv-Pp-YcX"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bv0-Nv-4kR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

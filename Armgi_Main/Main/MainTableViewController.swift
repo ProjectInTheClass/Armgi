@@ -115,7 +115,7 @@ class MainTableViewController: UITableViewController {
         studyCell.ddayLabel.text = ddayReturn(indexPathSection: indexPath.section)
         studyCell.goalStateBar.backgroundColor = UIColor().colorFromHex(dataCenter.templateColor[dataCenter.selectedColor[indexPath.section]])
 
-        let goalVal = dataCenter.goalData.currentGoalVal/dataCenter.goalData.goalList[indexPath.section]
+        let goalVal = dataCenter.goalData.currentGoalVal[indexPath.section]/dataCenter.goalData.goalList[indexPath.section]
         if goalVal <= 1.0{
             studyCell.goalStateBar.frame.size.width = CGFloat(goalVal*343)
             studyCell.goalStateLabel.text = String(Int(goalVal*100)) + "%"
@@ -184,6 +184,7 @@ class MainTableViewController: UITableViewController {
                 dataCenter.ddayList.remove(at: indexPath.section)
                 dataCenter.goalData.goalList.remove(at: indexPath.section)
                 dataCenter.selectedColor.remove(at:indexPath.section)
+                dataCenter.goalData.currentGoalVal.remove(at: indexPath.section)
 
                 // Delete the row from the data source
                 let indexSet = IndexSet(arrayLiteral: indexPath.section)
@@ -207,9 +208,9 @@ class MainTableViewController: UITableViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let ModeVC = segue.destination as? ModeViewController
+        let UnitVC = segue.destination as? UnitTableViewController
         if let selectedIndexPath = self.tableView.indexPathForSelectedRow {
-            ModeVC?.selectedSubject = selectedIndexPath.section
+            UnitVC?.selectedSubject = selectedIndexPath.section
         }
     }
 
