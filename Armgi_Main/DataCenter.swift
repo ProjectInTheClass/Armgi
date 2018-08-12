@@ -16,6 +16,7 @@ class DataCenter: NSObject, NSCoding{
     var ddayList:[Int]
     var goalData:GoalData
     var selectedColor:[Int]
+    var todayDate:Date // 앱을 처음 실행한 날짜가 들어갈 것이고..
 
     var templateColor:[String]
 
@@ -24,6 +25,7 @@ class DataCenter: NSObject, NSCoding{
         self.ddayList = []
         self.goalData = GoalData()
         self.selectedColor = []
+        self.todayDate = Date()
 
         self.templateColor = ["#60ADED","#8EFA00","#FFFB00","#FF2600"]
         //순서대로 파란색,초록색,노란색,빨간색
@@ -34,6 +36,7 @@ class DataCenter: NSObject, NSCoding{
         aCoder.encode(self.ddayList, forKey: "ddayList")
         aCoder.encode(self.goalData, forKey: "goalData")
         aCoder.encode(self.selectedColor, forKey: "selectedColor")
+        aCoder.encode(self.todayDate, forKey: "todayDate")
         aCoder.encode(self.templateColor, forKey: "templateColor")
     }
 
@@ -57,6 +60,11 @@ class DataCenter: NSObject, NSCoding{
             self.selectedColor = selectedColor
         } else {
             self.selectedColor = []
+        }
+        if let todayDate = aDecoder.decodeObject(forKey:"todayDate") as? Date{
+            self.todayDate = todayDate
+        } else {
+            self.todayDate = Date()
         }
         if let templateColor = aDecoder.decodeObject(forKey:"templateColor") as? [String]{
             self.templateColor = templateColor

@@ -49,10 +49,26 @@ class MyArmgiTableViewController: UITableViewController {
             }
         }
 
-        // 랜덤으로 암기를 하나 선정해서 보여준다. (날마다 바뀌도록 하려면 How?)
-        if starList.count > 0 {
+        // 랜덤으로 암기를 하나 선정해서 보여준다.
+
+        let date = dataCenter.todayDate
+
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
+        dateFormatter.timeStyle = .none
+
+        let todayDate = dateFormatter.string(from: date)
+        let currentDate = dateFormatter.string(from: Date())
+
+        print(todayDate)
+        print(currentDate)
+        print()
+
+        if starList.count > 0 && todayDate != currentDate { // 근데 만약 완전 처음 앱을 실행했다면? 아무것도 안뜨다가 다음날에 뜰것.
             let randNum:UInt32 = arc4random_uniform(UInt32(starList.count))
             randomTV.text = starList[Int(randNum)]
+
+            dataCenter.todayDate = Date() // 오늘 날짜로 갱신.
         }
 
         self.tableView.reloadData()
