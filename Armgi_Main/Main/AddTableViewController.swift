@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddTableViewController: UITableViewController, UITextFieldDelegate, UICollectionViewDataSource, UICollectionViewDelegate {
+class AddTableViewController: UITableViewController, UITextFieldDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
     @IBOutlet weak var collectionView: UICollectionView!
 
@@ -29,6 +29,18 @@ class AddTableViewController: UITableViewController, UITextFieldDelegate, UIColl
             cell.layer.borderWidth = 2.0
         }
         return cell
+    }
+    
+    //콜렉션 뷰 가운데정렬(viewdidload의 스페이싱은 없앰)
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        
+        let tableViewWidth:Int = Int(tableView.frame.size.width)
+        let totalCellWidth:Int = 50*dataCenter.templateColor.count
+        let totalSpacingWidth:Int = 20*(dataCenter.templateColor.count - 1)
+        
+        let edgeInsets = (tableViewWidth - (totalCellWidth + totalSpacingWidth)) / 2
+        
+        return UIEdgeInsetsMake(0, CGFloat(edgeInsets), 0, CGFloat(edgeInsets))
     }
     
     //collection view center align
@@ -72,11 +84,6 @@ class AddTableViewController: UITableViewController, UITextFieldDelegate, UIColl
         inputAlert.addAction(inputAlertAction)
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(dismissFunc), name: Notification.Name.UIApplicationWillResignActive, object: nil)
-        // 콜렉션 뷰 셀 간격.
-        let layout = UICollectionViewFlowLayout()
-        layout.minimumInteritemSpacing = 20
-        layout.minimumLineSpacing = 20 // ?
-        collectionView.collectionViewLayout = layout
         
     }
 
