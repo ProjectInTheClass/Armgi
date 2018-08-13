@@ -8,25 +8,47 @@
 
 import UIKit
 
-class UnitTableViewController: UITableViewController, UITextFieldDelegate {
+class UnitTableViewCell: UITableViewCell {
+    var isObserving = false;
 
-    @IBOutlet weak var newUnitName: UITextField!
-    @IBOutlet weak var modeView: UIView!
+    @IBOutlet weak var unitLabel: UILabel!
+    @IBOutlet weak var detailLabel: UILabel!
     @IBOutlet weak var createButton: UIButton!
     @IBOutlet weak var quizButton: UIButton!
     @IBOutlet weak var incorrectButton: UIButton!
-    
-    var selectedSubject:Int = 0
-    var selectedUnit:Int = 0
 
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedUnit = indexPath.row
+    @IBOutlet weak var modeView: UIView!
+    
+    class var expandedHeight: CGFloat { get { return 179 } }
+    class var defaultHeight: CGFloat { get { return 40 } }
+
+    func checkHeight() {
+        modeView.isHidden = (frame.size.height < UnitTableViewCell.expandedHeight)
     }
 
-    override func viewDidLoad() {
-//        self.modeView.layer.borderWidth = 1
-//        self.modeView.layer.borderColor = UIColor.darkGray.cgColor
+    func watchFrameChanges() {
+        if !isObserving {
+            addObserver(self, forKeyPath: "frame", options: [.new, .initial], context: nil)
+            isObserving = true;
+        }
+    }
 
+    func ignoreFrameChanges() {
+        if isObserving {
+            removeObserver(self, forKeyPath: "frame")
+            isObserving = false;
+        }
+    }
+
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if keyPath == "frame" {
+            checkHeight()
+        }
+    }
+
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
         createButton.layer.shadowColor = UIColor.gray.cgColor
         createButton.layer.shadowOffset = CGSize(width: 2, height: 2)
         createButton.layer.shadowRadius = 2
@@ -41,9 +63,65 @@ class UnitTableViewController: UITableViewController, UITextFieldDelegate {
         incorrectButton.layer.shadowOffset = CGSize(width: 2, height: 2)
         incorrectButton.layer.shadowRadius = 2
         incorrectButton.layer.shadowOpacity = 1.0
+        // Initialization code
+    }
+
+}
+
+class UnitTableViewController: UITableViewController, UITextFieldDelegate {
+
+    @IBOutlet weak var newUnitName: UITextField!
+
+    var selectedSubject:Int = 0
+    var selectedUnit:Int = 0
+    var selectedIndexPath: IndexPath?
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedUnit = indexPath.row
+
+        let previousIndexPath = selectedIndexPath
+        if indexPath == selectedIndexPath {
+            selectedIndexPath = nil
+        } else {
+            selectedIndexPath = indexPath
+        }
+
+        var indexPaths : Array<IndexPath> = []
+        if let previous = previousIndexPath {
+            indexPaths += [previous]
+        }
+        if let current = selectedIndexPath {
+            indexPaths += [current]
+        }
+        if indexPaths.count > 0 {
+            tableView.reloadRows(at: indexPaths, with: .automatic)
+        }
+
+        selectedUnit = indexPath.row
+        self.view.endEditing(true)
+        self.tableView.reloadData()
+    }
+
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        (cell as? UnitTableViewCell)?.watchFrameChanges()
+    }
+    override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        (cell as? UnitTableViewCell)?.ignoreFrameChanges()
+    }
+
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath == selectedIndexPath {
+            return UnitTableViewCell.expandedHeight
+        } else {
+            return UnitTableViewCell.defaultHeight
+        }
+    }
+
+    override func viewDidLoad() {
+//        self.modeView.layer.borderWidth = 1
+//        self.modeView.layer.borderColor = UIColor.darkGray.cgColor
 
         super.viewDidLoad()
-
         self.navigationItem.rightBarButtonItem = self.editButtonItem // 테이블뷰 셀 편집
     }
 
@@ -51,6 +129,18 @@ class UnitTableViewController: UITableViewController, UITextFieldDelegate {
         print(selectedSubject)
         self.tableView.reloadData()
     }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        for cell in tableView.visibleCells as! [UnitTableViewCell] {
+            cell.ignoreFrameChanges()
+        }
+    }
+
+
+
+
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -73,12 +163,14 @@ class UnitTableViewController: UITableViewController, UITextFieldDelegate {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "unitCells", for: indexPath)
-        cell.textLabel?.text = dataCenter.studyList[selectedSubject].unitList[indexPath.row].unitName
+        guard let unitCell = cell as? UnitTableViewCell else{
+            return cell
+        }
 
+        unitCell.unitLabel.text = dataCenter.studyList[selectedSubject].unitList[indexPath.row].unitName
         let unit = dataCenter.studyList[selectedSubject].unitList[indexPath.row]
-        cell.detailTextLabel?.text = "\(unit.allWords.count) , \(unit.allSentences.count)"
-
-        return cell
+        unitCell.detailLabel.text = "\(unit.allWords.count) , \(unit.allSentences.count)"
+        return unitCell
     }
 
 // 새로운 단원명 버튼으로 추가하기.
@@ -116,17 +208,11 @@ class UnitTableViewController: UITableViewController, UITextFieldDelegate {
         if segue.identifier == "CreateSegue" {
             let SegmentVC = segue.destination as? SegmentViewController
             SegmentVC?.selectedSubject = selectedSubject
-            let selectedIndexPath = self.tableView.indexPathForSelectedRow
-            if let indexPath = selectedIndexPath{
-                SegmentVC?.selectedUnit = indexPath.row
-            }
+            SegmentVC?.selectedUnit = selectedUnit
         } else if segue.identifier == "QuizSegue" {
             let QuizSegmentVC = segue.destination as? QuizSegmentViewController
             QuizSegmentVC?.selectedSubject = selectedSubject
-            let selectedIndexPath = self.tableView.indexPathForSelectedRow
-            if let indexPath = selectedIndexPath{
-                QuizSegmentVC?.selectedUnit = indexPath.row
-            }
+            QuizSegmentVC?.selectedUnit = selectedUnit
         } else if segue.identifier == "IncorrectSegue" {
             
         }

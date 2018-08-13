@@ -20,6 +20,11 @@ class SegmentViewController: UIViewController {
         super.viewDidLoad()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        print(selectedUnit)
+        print(selectedSubject)
+    }
+
     @IBAction func switchViews(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
             wordsView.alpha = 1
