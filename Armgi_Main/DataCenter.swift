@@ -113,12 +113,14 @@ class Study: NSObject, NSCoding {
 class OneUnit: NSObject, NSCoding {
     var unitName:String
     var allWords:[Words] // 단어식
-    var allSentences:[String] // 문장식
+    var allSentences:[Sentences] // 문장식
+    var sentencesQuiz:[[String]]
 
-    init(unitName:String, allWords:[Words], allSentences:[String]) {
+    init(unitName:String, allWords:[Words], allSentences:[Sentences]) {
         self.unitName = unitName
         self.allWords = allWords
         self.allSentences = allSentences
+        self.sentencesQuiz = []
     }
 
     convenience init(unitName: String) {
@@ -129,6 +131,7 @@ class OneUnit: NSObject, NSCoding {
         aCoder.encode(self.unitName, forKey: "unitName")
         aCoder.encode(self.allWords, forKey: "allWords")
         aCoder.encode(self.allSentences, forKey: "allSentences")
+        aCoder.encode(self.sentencesQuiz, forKey: "sentencesQuiz")
     }
 
     public required init?(coder aDecoder: NSCoder) {
@@ -142,10 +145,15 @@ class OneUnit: NSObject, NSCoding {
         } else {
             self.allWords = []
         }
-        if let allSentences = aDecoder.decodeObject(forKey:"allSenctences") as? [String]{
+        if let allSentences = aDecoder.decodeObject(forKey:"allSentences") as? [Sentences]{
             self.allSentences = allSentences
         } else {
             self.allSentences = []
+        }
+        if let sentencesQuiz = aDecoder.decodeObject(forKey:"sentencesQuiz") as? [[String]]{
+            self.sentencesQuiz = sentencesQuiz
+        } else {
+            self.sentencesQuiz = []
         }
     }
 
@@ -188,6 +196,41 @@ class Words: NSObject, NSCoding{
             self.starFlag = false
         }
         if let starImageFlag = aDecoder.decodeObject(forKey:"starImageFlag") as? Bool{
+            self.starImageFlag = starImageFlag
+        } else {
+            self.starImageFlag = false
+        }
+    }
+}
+
+class Sentences: NSObject, NSCoding { // starFlag, starImageFlag 가 아카이빙할 때 겹치지 않을까?
+    var sentences:String
+    var starFlag:Bool
+    var starImageFlag:Bool
+
+    init(sentences:String) {
+        self.sentences = sentences
+        self.starFlag = true
+        self.starImageFlag = false
+    }
+    public func encode(with aCoder: NSCoder) {
+        aCoder.encode(self.sentences, forKey: "sentences")
+        aCoder.encode(self.starFlag, forKey: "starFlag")
+        aCoder.encode(self.starImageFlag, forKey: "starImageFlag")
+    }
+
+    public required init?(coder aDecoder: NSCoder) {
+        if let sentences = aDecoder.decodeObject(forKey:"sentences") as? String {
+            self.sentences = sentences
+        } else {
+            self.sentences = " "
+        }
+        if let starFlag = aDecoder.decodeObject(forKey:"starFlag") as? Bool {
+            self.starFlag = starFlag
+        } else {
+            self.starFlag = false
+        }
+        if let starImageFlag = aDecoder.decodeObject(forKey:"starIamgeFlag") as? Bool {
             self.starImageFlag = starImageFlag
         } else {
             self.starImageFlag = false

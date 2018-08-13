@@ -25,14 +25,22 @@ class BasicQuizViewController: UIViewController {
 
     var selectedSubject:Int = 0
     var selectedUnit:Int = 0
-    var qIndex: Int = 0
+
+    var qIndex:Int = 0
+    var answerIndex:Int = 0
+
+    var questionList:[String] = []
+    var answerWordsList:[String] = []
+    var answerSentencesList:[[String]] = []
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
         subjectLabel.text = dataCenter.studyList[selectedSubject].subjectName
         unitLabel.text = dataCenter.studyList[selectedSubject].unitList[selectedUnit].unitName
 
-        let count = dataCenter.studyList[selectedSubject].unitList[selectedUnit].allWords.count
+        let count:Int = dataCenter.studyList[selectedSubject].unitList[selectedUnit].allWords.count + dataCenter.studyList[selectedSubject].unitList[selectedUnit].allSentences.count
+
         if count == 0 { // 생성된 암기가 없으면..
             // self.view.isHidden = true
             self.view = noDataView
@@ -40,9 +48,27 @@ class BasicQuizViewController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        let count = dataCenter.studyList[selectedSubject].unitList[selectedUnit].allWords.count
+        let countWords:Int = dataCenter.studyList[selectedSubject].unitList[selectedUnit].allWords.count
+        let countSentences:Int = dataCenter.studyList[selectedSubject].unitList[selectedUnit].allSentences.count
+        let count:Int = countWords + countSentences
+
+        questionList = []
+        answerWordsList = []
+        answerSentencesList = []
+
+        for i in 0 ..< countWords {
+            questionList.append(dataCenter.studyList[selectedSubject].unitList[selectedUnit].allWords[i].keyword)
+            answerWordsList.append(dataCenter.studyList[selectedSubject].unitList[selectedUnit].allWords[i].explanation)
+        }
+
+        for i in 0 ..< countSentences {
+            questionList.insert(dataCenter.studyList[selectedSubject].unitList[selectedUnit].allSentences[i].sentences, at: countWords)
+            answerSentencesList.append(dataCenter.studyList[selectedSubject].unitList[selectedUnit].sentencesQuiz[i])
+        }
+
+        print(questionList)
         if count > 0 && qIndex < count {
-            questionLabel.text = dataCenter.studyList[selectedSubject].unitList[selectedUnit].allWords[qIndex].keyword
+            questionLabel.text = questionList[qIndex]
         }
 
         answerLabel.text = ""
@@ -53,46 +79,80 @@ class BasicQuizViewController: UIViewController {
     }
 
     @IBAction func CheckButton(_ sender: Any) {
-        let count = dataCenter.studyList[selectedSubject].unitList[selectedUnit].allWords.count
+        let countWords:Int = dataCenter.studyList[selectedSubject].unitList[selectedUnit].allWords.count
+        let countSentences:Int = dataCenter.studyList[selectedSubject].unitList[selectedUnit].allSentences.count
+        let count:Int = countWords + countSentences
+
         if count > 0 {
-            let answer = dataCenter.studyList[selectedSubject].unitList[selectedUnit].allWords[qIndex].explanation
-            answerLabel.text = answer
-            if answerTF.text == answer {
-                answerLabel.textColor = UIColor.green
-            } else {
-                answerLabel.textColor = UIColor.red
-                incorrectButton.isHidden = false
+            if answerIndex < countWords {
+                let answer = answerWordsList[qIndex]
+
+                answerLabel.text = answer
+                if answerTF.text == answer {
+                    answerLabel.textColor = UIColor.green
+                    incorrectButton.isHidden = true
+                    checkButton.isEnabled = false
+                } else {
+                    answerLabel.textColor = UIColor.red
+                    incorrectButton.isHidden = false
+                    checkButton.isEnabled = false
+                }
+
+                answerIndex += 1
+
+            } else if answerIndex >= countWords && answerIndex < count {
+                print("이거다 + \(answerSentencesList)")
+                let answer = answerSentencesList[qIndex - countWords]
+
+                // 답을 만들기 위함.
+                var answerStr:String = ""
+                for item in answer {
+                    answerStr += item
+                }
+                // 답을 출력해서 보여주기 위함.
+                var str:String = ""
+                for item in answer {
+                    str += item
+                    str += ", "
+                }
+                print(str)
+                answerLabel.text = str
+
+                let inputAnswer = answerTF.text?.components(separatedBy: ["/"," "]).joined()
+
+                if inputAnswer == answerStr {
+                    answerLabel.textColor = UIColor.green
+                } else {
+                    answerLabel.textColor = UIColor.red
+                    incorrectButton.isHidden = false
+                }
+
+                answerIndex += 1
             }
         }
+
         starButton.isHidden = false
         preButton.isHidden = false
         nextButton.isHidden = false
-        // checkButton.isEnabled = false
         self.view.endEditing(true)
     }
-    
+
     @IBAction func NextButtton(_ sender: Any) {
         self.quizCardView.NextButton()
-        /*
-        guard let indexPath = collectionView.indexPathsForVisibleItems.first.flatMap({
-            IndexPath(item: $0.row + 1, section: $0.section)
-        }), collectionView.cellForItem(at: indexPath) != nil else {
-            return
-        }
-        collectionView.scrollToItem(at: indexPath, at: .left, animated: true)
-*/
-        qIndex += 1
+        checkButton.isEnabled = true
 
-        let count = dataCenter.studyList[selectedSubject].unitList[selectedUnit].allWords.count
+        qIndex += 1
+        let count:Int = dataCenter.studyList[selectedSubject].unitList[selectedUnit].allWords.count + dataCenter.studyList[selectedSubject].unitList[selectedUnit].allSentences.count
+
         if qIndex >= count {
             print ("암기 퀴즈가 끝났습니다!\r\n목표량이 일 증가합니다.")
             dataCenter.goalData.currentGoalVal[selectedSubject] += 1
             checkButton.isEnabled = false
             /*
-            if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CelebrateVC") as? CelebrateViewController {
-                present(vc, animated: true, completion: nil)
-            }
-            */
+             if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CelebrateVC") as? CelebrateViewController {
+             present(vc, animated: true, completion: nil)
+             }
+             */
         }
         answerTF.text = "" // 텍스트 필드 비워주기.
         self.viewWillAppear(true)
@@ -100,6 +160,8 @@ class BasicQuizViewController: UIViewController {
 
     @IBAction func PreButton(_ sender: Any) {
         self.quizCardView.PreButton()
+        checkButton.isEnabled = true
+
         if qIndex > 0 {
             qIndex -= 1
         }
@@ -117,7 +179,7 @@ class BasicQuizViewController: UIViewController {
             flag = true
         }
     }
-    
+
     @IBAction func incorrectButton(_ sender: Any) {
     }
 

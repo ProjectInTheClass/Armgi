@@ -45,6 +45,9 @@ class SegmentViewController: UIViewController {
             WordTVC?.selectedSubject = selectedSubject
             WordTVC?.selectedUnit = selectedUnit
         } else if segue.identifier == "toSentencesView" {
+            let SentenceTVC = segue.destination as? SentenceTableViewController
+            SentenceTVC?.selectedSubject = selectedSubject
+            SentenceTVC?.selectedUnit = selectedUnit
         }
     }
 }
