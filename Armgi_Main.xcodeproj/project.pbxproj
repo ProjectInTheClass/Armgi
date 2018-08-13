@@ -27,6 +27,7 @@
 		D11328F6211D230500FDF89C /* SettingUserModeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11328F4211D230400FDF89C /* SettingUserModeTableViewController.swift */; };
 		D11328F7211D230500FDF89C /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11328F5211D230500FDF89C /* SettingViewController.swift */; };
 		D11328F9211D24AC00FDF89C /* IncorrectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11328F8211D24AC00FDF89C /* IncorrectViewController.swift */; };
+		EEED7B3F21216AC4007841B7 /* QuizExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEED7B3E21216AC4007841B7 /* QuizExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		D11328F4211D230400FDF89C /* SettingUserModeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingUserModeTableViewController.swift; sourceTree = "<group>"; };
 		D11328F5211D230500FDF89C /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		D11328F8211D24AC00FDF89C /* IncorrectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncorrectViewController.swift; sourceTree = "<group>"; };
+		EEED7B3E21216AC4007841B7 /* QuizExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +129,7 @@
 			children = (
 				67A5F115211EC064009EEE0A /* QuizSegmentViewController.swift */,
 				67A5F113211EBD1A009EEE0A /* BasicQuizViewController.swift */,
+				EEED7B3E21216AC4007841B7 /* QuizExtension.swift */,
 				67A5F11A211EFA3F009EEE0A /* CelebrateViewController.swift */,
 			);
 			path = Quiz;
@@ -228,6 +231,7 @@
 				67A308392117D9CC001FBCC4 /* SegmentViewController.swift in Sources */,
 				D11328F7211D230500FDF89C /* SettingViewController.swift in Sources */,
 				67A308312112FCDF001FBCC4 /* Extensions.swift in Sources */,
+				EEED7B3F21216AC4007841B7 /* QuizExtension.swift in Sources */,
 				D11328F9211D24AC00FDF89C /* IncorrectViewController.swift in Sources */,
 				67A308372117D9C4001FBCC4 /* SentenceTableViewController.swift in Sources */,
 				67A5F11B211EFA3F009EEE0A /* CelebrateViewController.swift in Sources */,

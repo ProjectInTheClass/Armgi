@@ -20,7 +20,7 @@ class BasicQuizViewController: UIViewController {
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var preButton: UIButton!
     @IBOutlet weak var checkButton: UIButton!
-    
+    @IBOutlet weak var quizCardView: UIView!
     @IBOutlet var noDataView: UIView!
 
     var selectedSubject:Int = 0
@@ -72,6 +72,7 @@ class BasicQuizViewController: UIViewController {
     }
     
     @IBAction func NextButtton(_ sender: Any) {
+        self.quizCardView.NextButton()
         /*
         guard let indexPath = collectionView.indexPathsForVisibleItems.first.flatMap({
             IndexPath(item: $0.row + 1, section: $0.section)
@@ -98,6 +99,7 @@ class BasicQuizViewController: UIViewController {
     }
 
     @IBAction func PreButton(_ sender: Any) {
+        self.quizCardView.PreButton()
         if qIndex > 0 {
             qIndex -= 1
         }
