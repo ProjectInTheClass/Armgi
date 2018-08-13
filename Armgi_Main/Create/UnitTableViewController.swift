@@ -43,6 +43,8 @@ class UnitTableViewController: UITableViewController, UITextFieldDelegate {
         incorrectButton.layer.shadowOpacity = 1.0
 
         super.viewDidLoad()
+
+        self.navigationItem.rightBarButtonItem = self.editButtonItem // 테이블뷰 셀 편집
     }
 
     override func viewWillAppear(_ animated: Bool) {

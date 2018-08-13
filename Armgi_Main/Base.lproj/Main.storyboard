@@ -271,12 +271,6 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="학습 목표" id="Tos-nn-igA">
-                        <barButtonItem key="leftBarButtonItem" title="편집" id="pww-0G-vrj">
-                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <connections>
-                                <action selector="editList:" destination="qO7-uo-nTn" id="6T1-zv-qA0"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Es5-Vg-uhr">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
@@ -1571,9 +1565,6 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="단원 및 모드" id="yqI-cd-mUm">
                         <barButtonItem key="backBarButtonItem" title=" " id="bQH-6R-9fm"/>
-                        <barButtonItem key="rightBarButtonItem" title="편집" id="6zy-oN-did">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="createButton" destination="x0D-IF-oqH" id="I1N-HK-bQS"/>

@@ -48,22 +48,15 @@ class MainTableViewController: UITableViewController {
 
     @IBOutlet weak var noDataView: UIView! //strong으로 하면 더 빨라지는 느낌?
 
-    // 상단의 수정 bar button 으로 삭제하기.
-    @IBAction func editList(_ sender: Any) {
-        guard !dataCenter.studyList.isEmpty else{
-            return
-        }
-        self.setEditing(true, animated: true)
-    }
-
     var selectedColor:[Int] = [] // Add에서 선택한 색깔 담음.
     var selectedSubject:Int = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         //알림허용
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert,.sound], completionHandler: { didAllow,Error in print(didAllow) })
+
+        self.navigationItem.leftBarButtonItem = self.editButtonItem // 테이블뷰 셀 편집
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -80,6 +73,7 @@ class MainTableViewController: UITableViewController {
         if dataCenter.studyList.count != 0
         {
             tableView.backgroundView = nil
+            // tableView.backgroundColor = UIColor().colorFromHex("#4C516D")
         }
         else
         {
@@ -127,10 +121,6 @@ class MainTableViewController: UITableViewController {
         }
         return studyCell
     }
-
-//    override func tableView(_ tableView: UITableView, titleForHeaderInSection section:Int) -> String?{
-//        return dataCenter.studyList[section]?.subjectName
-//    }
 
     //테이블뷰 헤더. 색은 bgcolor 바꾸면 됨!!
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
