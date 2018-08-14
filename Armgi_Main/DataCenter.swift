@@ -19,6 +19,8 @@ class DataCenter: NSObject, NSCoding{
     var todayDate:Date // 앱을 처음 실행한 날짜가 들어갈 것이고..
 
     var templateColor:[String]
+    
+    var repeatedWeekdays:[Int]
 
     override init() {
         self.studyList = []
@@ -29,6 +31,8 @@ class DataCenter: NSObject, NSCoding{
 
         self.templateColor = ["#60ADED","#8EFA00","#FFFB00","#FF2600"]
         //순서대로 파란색,초록색,노란색,빨간색
+        
+        self.repeatedWeekdays = []
     }
 
     public func encode(with aCoder: NSCoder) {
@@ -38,6 +42,7 @@ class DataCenter: NSObject, NSCoding{
         aCoder.encode(self.selectedColor, forKey: "selectedColor")
         aCoder.encode(self.todayDate, forKey: "todayDate")
         aCoder.encode(self.templateColor, forKey: "templateColor")
+        aCoder.encode(self.repeatedWeekdays, forKey: "repeatedWeekdays")
     }
 
     public required init?(coder aDecoder: NSCoder) {
@@ -70,6 +75,11 @@ class DataCenter: NSObject, NSCoding{
             self.templateColor = templateColor
         } else {
             self.templateColor = ["#60ADED","#8EFA00","#FFFB00","#FF2600"]
+        }
+        if let repeatedWeekdays = aDecoder.decodeObject(forKey:"repeatedWeekdays") as? [Int] {
+            self.repeatedWeekdays = repeatedWeekdays
+        } else {
+            self.repeatedWeekdays = []
         }
     }
 }
