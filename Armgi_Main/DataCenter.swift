@@ -174,12 +174,14 @@ class Words: NSObject, NSCoding{
     var explanation:String
     var starFlag:Bool
     var starImageFlag:Bool
+    var odapCount:Int
 
     init(keyword:String, explanation:String) {
         self.keyword = keyword
         self.explanation = explanation
         self.starFlag = true
         self.starImageFlag = false
+        self.odapCount = 0
     }
 
     public func encode(with aCoder: NSCoder) {
@@ -187,6 +189,7 @@ class Words: NSObject, NSCoding{
         aCoder.encode(self.explanation, forKey: "explanation")
         aCoder.encode(self.starFlag, forKey: "starFlag")
         aCoder.encode(self.starImageFlag, forKey: "starImageFlag")
+        aCoder.encode(self.odapCount, forKey: "odapCount")
     }
 
     public required init?(coder aDecoder: NSCoder) {
@@ -210,6 +213,11 @@ class Words: NSObject, NSCoding{
         } else {
             self.starImageFlag = false
         }
+        if let odapCount = aDecoder.decodeObject(forKey:"odapCount") as? Int{
+            self.odapCount = odapCount
+        } else {
+            self.odapCount = 0
+        }
     }
 }
 
@@ -217,16 +225,19 @@ class Sentences: NSObject, NSCoding { // starFlag, starImageFlag 가 아카이�
     var sentences:String
     var starFlag:Bool
     var starImageFlag:Bool
+    var odapCount:Int
 
     init(sentences:String) {
         self.sentences = sentences
         self.starFlag = true
         self.starImageFlag = false
+        self.odapCount = 0
     }
     public func encode(with aCoder: NSCoder) {
         aCoder.encode(self.sentences, forKey: "sentences")
         aCoder.encode(self.starFlag, forKey: "starFlag")
         aCoder.encode(self.starImageFlag, forKey: "starImageFlag")
+        aCoder.encode(self.odapCount, forKey: "odapCount")
     }
 
     public required init?(coder aDecoder: NSCoder) {
@@ -244,6 +255,11 @@ class Sentences: NSObject, NSCoding { // starFlag, starImageFlag 가 아카이�
             self.starImageFlag = starImageFlag
         } else {
             self.starImageFlag = false
+        }
+        if let odapCount = aDecoder.decodeObject(forKey:"odapCount") as? Int{
+            self.odapCount = odapCount
+        } else {
+            self.odapCount = 0
         }
     }
 }

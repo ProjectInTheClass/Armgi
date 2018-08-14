@@ -214,7 +214,9 @@ class UnitTableViewController: UITableViewController, UITextFieldDelegate {
             QuizSegmentVC?.selectedSubject = selectedSubject
             QuizSegmentVC?.selectedUnit = selectedUnit
         } else if segue.identifier == "IncorrectSegue" {
-            
+            let IncorrectVC = segue.destination as? IncorrectViewController
+            IncorrectVC?.selectedSubject = selectedSubject
+            IncorrectVC?.selectedUnit = selectedUnit
         }
     }
 }

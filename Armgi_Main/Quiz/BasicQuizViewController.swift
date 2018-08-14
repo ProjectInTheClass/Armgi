@@ -160,6 +160,8 @@ class BasicQuizViewController: UIViewController {
 
     @IBAction func NextButtton(_ sender: Any) {
         self.quizCardView.NextButton()
+
+        incorrectButton.isEnabled = true
         checkButton.isEnabled = true
 
         qIndex += 1
@@ -181,6 +183,8 @@ class BasicQuizViewController: UIViewController {
 
     @IBAction func PreButton(_ sender: Any) {
         self.quizCardView.PreButton()
+
+        incorrectButton.isEnabled = true
         checkButton.isEnabled = true
 
         if qIndex > 0 {
@@ -202,6 +206,17 @@ class BasicQuizViewController: UIViewController {
     }
 
     @IBAction func incorrectButton(_ sender: Any) {
+        let countWords:Int = dataCenter.studyList[selectedSubject].unitList[selectedUnit].allWords.count
+        let countSentences:Int = dataCenter.studyList[selectedSubject].unitList[selectedUnit].allSentences.count
+        let count:Int = countWords + countSentences
+
+        if qIndex < countWords {
+            dataCenter.studyList[selectedSubject].unitList[selectedUnit].allWords[qIndex].odapCount += 1
+        } else if qIndex >= countWords && qIndex < count {
+            dataCenter.studyList[selectedSubject].unitList[selectedUnit].allSentences[qIndex - countWords].odapCount += 1
+        }
+
+        incorrectButton.isEnabled = false
     }
 
     override func didReceiveMemoryWarning() {

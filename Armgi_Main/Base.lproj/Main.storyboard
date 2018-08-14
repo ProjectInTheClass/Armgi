@@ -1187,14 +1187,17 @@
                     </view>
                     <navigationItem key="navigationItem" title="오답노트" id="ZEe-Nq-57P"/>
                     <connections>
+                        <outlet property="oneLabel" destination="EIr-IZ-gre" id="Uyi-dz-Wbg"/>
                         <outlet property="oneTime" destination="OJJ-ah-o20" id="aO4-JO-MjZ"/>
+                        <outlet property="threeLabel" destination="kPe-oi-zoq" id="94H-bi-M27"/>
                         <outlet property="threeTime" destination="ySW-4Z-MCX" id="Xwl-zq-e6W"/>
+                        <outlet property="twoLabel" destination="f0K-s5-qc2" id="tP2-at-1vr"/>
                         <outlet property="twoTime" destination="59K-qN-1vn" id="ppb-q0-Vkq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FLY-Yb-E5I" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4748" y="1021"/>
+            <point key="canvasLocation" x="4748" y="1460"/>
         </scene>
         <!--설정-->
         <scene sceneID="Rly-kt-DOI">

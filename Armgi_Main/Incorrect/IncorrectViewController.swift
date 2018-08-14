@@ -14,6 +14,12 @@ class IncorrectViewController: UIViewController {
     @IBOutlet weak var twoTime: UIView!
     @IBOutlet weak var threeTime: UIView!
     
+    @IBOutlet weak var oneLabel: UILabel!
+    @IBOutlet weak var twoLabel: UILabel!
+    @IBOutlet weak var threeLabel: UILabel!
+
+    var selectedSubject = 0
+    var selectedUnit = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +32,49 @@ class IncorrectViewController: UIViewController {
         threeTime.layer.borderColor = UIColor.black.cgColor
         threeTime.layer.borderWidth = 0.5
         
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        let wordsCount:Int = dataCenter.studyList[selectedSubject].unitList[selectedUnit].allWords.count
+        let sentencesCount:Int = dataCenter.studyList[selectedSubject].unitList[selectedUnit].allSentences.count
+
+        var oneTime:Int = 0
+        var twoTime:Int = 0
+        var threeTime:Int = 0
+
+        for i in 0 ..< wordsCount {
+            switch dataCenter.studyList[selectedSubject].unitList[selectedUnit].allWords[i].odapCount {
+                case 0:
+                    break
+                case 1:
+                    oneTime += 1
+                    break
+                case 2:
+                    twoTime += 1
+                    break
+                default:
+                    threeTime += 1
+            }
+        }
+
+        for i in 0 ..< sentencesCount {
+            switch dataCenter.studyList[selectedSubject].unitList[selectedUnit].allSentences[i].odapCount {
+            case 0:
+                break
+            case 1:
+                oneTime += 1
+                break
+            case 2:
+                twoTime += 1
+                break
+            default:
+                threeTime += 1
+            }
+        }
+
+        oneLabel.text = String(oneTime)
+        twoLabel.text = String(twoTime)
+        threeLabel.text = String(threeTime)
     }
 
     override func didReceiveMemoryWarning() {
