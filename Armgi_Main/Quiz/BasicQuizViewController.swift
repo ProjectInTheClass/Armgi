@@ -29,7 +29,8 @@ class BasicQuizViewController: UIViewController {
     var qIndex:Int = 0
     var answerIndex:Int = 0
 
-    var questionList:[String] = []
+    var questionWordsList:[String] = []
+    var questionSentencesList:[String] = []
     var answerWordsList:[String] = []
     var answerSentencesList:[[String]] = []
 
@@ -52,23 +53,43 @@ class BasicQuizViewController: UIViewController {
         let countSentences:Int = dataCenter.studyList[selectedSubject].unitList[selectedUnit].allSentences.count
         let count:Int = countWords + countSentences
 
-        questionList = []
+        questionWordsList = []
+        questionSentencesList = []
         answerWordsList = []
         answerSentencesList = []
 
         for i in 0 ..< countWords {
-            questionList.append(dataCenter.studyList[selectedSubject].unitList[selectedUnit].allWords[i].keyword)
+            questionWordsList.append(dataCenter.studyList[selectedSubject].unitList[selectedUnit].allWords[i].keyword)
             answerWordsList.append(dataCenter.studyList[selectedSubject].unitList[selectedUnit].allWords[i].explanation)
         }
 
         for i in 0 ..< countSentences {
-            questionList.insert(dataCenter.studyList[selectedSubject].unitList[selectedUnit].allSentences[i].sentences, at: countWords)
+        questionSentencesList.insert(dataCenter.studyList[selectedSubject].unitList[selectedUnit].allSentences[i].sentences, at: 0)
             answerSentencesList.append(dataCenter.studyList[selectedSubject].unitList[selectedUnit].sentencesQuiz[i])
         }
 
-        print(questionList)
-        if count > 0 && qIndex < count {
-            questionLabel.text = questionList[qIndex]
+        if count > 0 && qIndex < countWords {
+            questionLabel.text = questionWordsList[qIndex]
+        } else if count > 0 && qIndex >= countWords && qIndex < count {
+            print("퀴즈 들어옴!")
+            // 괄호만 빼고 출력하기.
+            var question:String = ""
+            var flag = 0
+            for char in questionSentencesList[qIndex - countWords] {
+                if flag == 1 {
+                    question += "  "
+                    if char == ")" {
+                        question += String(char)
+                        flag = 0
+                    }
+                } else {
+                    question += String(char)
+                    if char == "(" {
+                        flag = 1
+                    }
+                }
+            }
+            questionLabel.text = question
         }
 
         answerLabel.text = ""
