@@ -91,6 +91,21 @@ class AddTableViewController: UITableViewController, UITextFieldDelegate, UIColl
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    //알람
+    @IBOutlet weak var timePicker: UIDatePicker!
+    
+    var repeatWeekdays:[Int] = []
+    @IBOutlet weak var repeatDetail: UILabel!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        repeatDetail.text = WeekdayTableViewController.repeatText(weekdays: repeatWeekdays)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let weekdayVC = segue.destination as? WeekdayTableViewController
+        weekdayVC?.delegate = self
+    }
 
 
 //완료 버튼으로 모달창 닫기.
@@ -106,6 +121,17 @@ class AddTableViewController: UITableViewController, UITextFieldDelegate, UIColl
                 dataCenter.goalData.goalList.append(Float(stepperValue.value))
                 dataCenter.selectedColor.append(collectionViewCellCurrent)
                 dataCenter.goalData.currentGoalVal.append(Float(0))
+                
+                let calendar = Calendar.current
+                let components = calendar.dateComponents([.hour, .minute], from: timePicker.date)
+                let pickedHour = components.hour
+                let pickedMinute = components.minute
+                if let hour = pickedHour, let minute = pickedMinute {
+                    dataCenter.alarmData.alarmHour = hour
+                    dataCenter.alarmData.alarmMinutes = minute
+                }
+                
+                dataCenter.alarmData.repeatedWeekdays.append(Int(0))
 
                 self.dismiss(animated: true, completion: nil)
             }

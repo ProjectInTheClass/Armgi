@@ -245,8 +245,10 @@
                         <outlet property="collectionView" destination="4Ym-mW-RR6" id="Fqv-V9-U4c"/>
                         <outlet property="endDatePicker" destination="zPL-b9-Kgm" id="4QX-67-ElO"/>
                         <outlet property="goalValueLabel" destination="fEW-ap-5Qh" id="FPV-qR-VZv"/>
+                        <outlet property="repeatDetail" destination="Ii0-wU-u6Z" id="jkK-OW-Pap"/>
                         <outlet property="stepperValue" destination="Wth-ep-Gyd" id="J5z-RP-coJ"/>
                         <outlet property="studyTitleInput" destination="aD4-qr-dG8" id="cCb-tR-vi6"/>
+                        <outlet property="timePicker" destination="l7o-2r-1Uq" id="IKN-zq-920"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ncY-gT-OYd" userLabel="First Responder" sceneMemberID="firstResponder"/>

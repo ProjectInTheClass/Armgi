@@ -20,7 +20,8 @@ class DataCenter: NSObject, NSCoding{
 
     var templateColor:[String]
     
-    var repeatedWeekdays:[Int]
+    var alarmOnOff:[Bool]
+    var alarmData:AlarmData
 
     override init() {
         self.studyList = []
@@ -32,7 +33,8 @@ class DataCenter: NSObject, NSCoding{
         self.templateColor = ["#60ADED","#8EFA00","#FFFB00","#FF2600"]
         //순서대로 파란색,초록색,노란색,빨간색
         
-        self.repeatedWeekdays = []
+        self.alarmOnOff = []
+        self.alarmData = AlarmData()
     }
 
     public func encode(with aCoder: NSCoder) {
@@ -42,7 +44,8 @@ class DataCenter: NSObject, NSCoding{
         aCoder.encode(self.selectedColor, forKey: "selectedColor")
         aCoder.encode(self.todayDate, forKey: "todayDate")
         aCoder.encode(self.templateColor, forKey: "templateColor")
-        aCoder.encode(self.repeatedWeekdays, forKey: "repeatedWeekdays")
+        aCoder.encode(self.alarmOnOff, forKey: "alarmOnOff")
+        aCoder.encode(self.alarmData, forKey: "alarmData")
     }
 
     public required init?(coder aDecoder: NSCoder) {
@@ -76,10 +79,15 @@ class DataCenter: NSObject, NSCoding{
         } else {
             self.templateColor = ["#60ADED","#8EFA00","#FFFB00","#FF2600"]
         }
-        if let repeatedWeekdays = aDecoder.decodeObject(forKey:"repeatedWeekdays") as? [Int] {
-            self.repeatedWeekdays = repeatedWeekdays
+        if let alarmOnOff = aDecoder.decodeObject(forKey: "alarmOnOff") as? [Bool] {
+            self.alarmOnOff = alarmOnOff
         } else {
-            self.repeatedWeekdays = []
+            self.alarmOnOff = []
+        }
+        if let alarmData = aDecoder.decodeObject(forKey: "alarmData") as? AlarmData {
+            self.alarmData = alarmData
+        } else {
+            self.alarmData = AlarmData()
         }
     }
 }
@@ -288,6 +296,42 @@ class GoalData: NSObject, NSCoding {
             self.currentGoalVal = currentGoalVal
         } else {
             self.currentGoalVal = []
+        }
+    }
+}
+
+class AlarmData: NSObject, NSCoding {
+    var alarmHour:Int
+    var alarmMinutes:Int
+    var repeatedWeekdays:[Int]
+    
+    override init() {
+        self.alarmHour = 0
+        self.alarmMinutes = 0
+        self.repeatedWeekdays = []
+    }
+    
+    public func encode(with aCoder: NSCoder) {
+        aCoder.encode(self.alarmHour, forKey: "alarmHour")
+        aCoder.encode(self.alarmMinutes, forKey: "alarmMinutes")
+        aCoder.encode(self.repeatedWeekdays, forKey: "repeatedWeekdays")
+    }
+    
+    public required init?(coder aDecoder: NSCoder) {
+        if let alarmHour = aDecoder.decodeObject(forKey: "alarmHour") as? Int {
+            self.alarmHour = alarmHour
+        } else {
+            self.alarmHour = 0
+        }
+        if let alarmMinutes = aDecoder.decodeObject(forKey: "alarmMinutes") as? Int {
+            self.alarmMinutes = alarmMinutes
+        } else {
+            self.alarmMinutes = 0
+        }
+        if let repeatedWeekdays = aDecoder.decodeObject(forKey:"repeatedWeekdays") as? [Int] {
+            self.repeatedWeekdays = repeatedWeekdays
+        } else {
+            self.repeatedWeekdays = []
         }
     }
 }

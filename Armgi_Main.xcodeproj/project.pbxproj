@@ -152,8 +152,8 @@
 		67CCBA0E2120508300A10587 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
-				D11328F4211D230400FDF89C /* SettingUserModeTableViewController.swift */,
 				D11328F5211D230500FDF89C /* SettingViewController.swift */,
+				D11328F4211D230400FDF89C /* SettingUserModeTableViewController.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
