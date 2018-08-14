@@ -100,7 +100,7 @@ class SentenceTableViewController: UITableViewController, UITextFieldDelegate{
                 var str:String = ""
                 var strArr:[String] = []
 
-                // 괄호 검사. //빈괄호도 막아야하나?
+                // 괄호 안의 값만 추출하기. // 빈괄호도 막아야하나?
                 for character in newSentence {
                     if character == "(" {
                         bracketCount += 1
@@ -128,7 +128,6 @@ class SentenceTableViewController: UITableViewController, UITextFieldDelegate{
                         strArr[index] = item.trimmingCharacters(in : ["("])
                         index += 1
                     }
-                    print(strArr)
                     dataCenter.studyList[selectedSubject].unitList[selectedUnit].sentencesQuiz.append(strArr)
                     print(dataCenter.studyList[selectedSubject].unitList[selectedUnit].sentencesQuiz)
                 }
