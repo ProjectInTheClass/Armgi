@@ -126,7 +126,6 @@ class UnitTableViewController: UITableViewController, UITextFieldDelegate {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        print(selectedSubject)
         self.tableView.reloadData()
     }
 

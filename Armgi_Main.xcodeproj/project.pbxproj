@@ -24,6 +24,7 @@
 		67A5F114211EBD1A009EEE0A /* BasicQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A5F113211EBD1A009EEE0A /* BasicQuizViewController.swift */; };
 		67A5F116211EC064009EEE0A /* QuizSegmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A5F115211EC064009EEE0A /* QuizSegmentViewController.swift */; };
 		67A5F11B211EFA3F009EEE0A /* CelebrateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A5F11A211EFA3F009EEE0A /* CelebrateViewController.swift */; };
+		67CCBA8821228A6400A10587 /* IncorrectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CCBA8721228A6400A10587 /* IncorrectTableViewController.swift */; };
 		D11328F6211D230500FDF89C /* SettingUserModeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11328F4211D230400FDF89C /* SettingUserModeTableViewController.swift */; };
 		D11328F7211D230500FDF89C /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11328F5211D230500FDF89C /* SettingViewController.swift */; };
 		D11328F9211D24AC00FDF89C /* IncorrectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11328F8211D24AC00FDF89C /* IncorrectViewController.swift */; };
@@ -51,6 +52,7 @@
 		67A5F113211EBD1A009EEE0A /* BasicQuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicQuizViewController.swift; sourceTree = "<group>"; };
 		67A5F115211EC064009EEE0A /* QuizSegmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizSegmentViewController.swift; sourceTree = "<group>"; };
 		67A5F11A211EFA3F009EEE0A /* CelebrateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CelebrateViewController.swift; sourceTree = "<group>"; };
+		67CCBA8721228A6400A10587 /* IncorrectTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncorrectTableViewController.swift; sourceTree = "<group>"; };
 		D11328F4211D230400FDF89C /* SettingUserModeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingUserModeTableViewController.swift; sourceTree = "<group>"; };
 		D11328F5211D230500FDF89C /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		D11328F8211D24AC00FDF89C /* IncorrectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncorrectViewController.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				D11328F8211D24AC00FDF89C /* IncorrectViewController.swift */,
+				67CCBA8721228A6400A10587 /* IncorrectTableViewController.swift */,
 			);
 			path = Incorrect;
 			sourceTree = "<group>";
@@ -235,6 +238,7 @@
 				67A308392117D9CC001FBCC4 /* SegmentViewController.swift in Sources */,
 				D11328F7211D230500FDF89C /* SettingViewController.swift in Sources */,
 				67A308312112FCDF001FBCC4 /* Extensions.swift in Sources */,
+				67CCBA8821228A6400A10587 /* IncorrectTableViewController.swift in Sources */,
 				EEED7B3F21216AC4007841B7 /* QuizExtension.swift in Sources */,
 				D11328F9211D24AC00FDF89C /* IncorrectViewController.swift in Sources */,
 				67A308372117D9C4001FBCC4 /* SentenceTableViewController.swift in Sources */,
