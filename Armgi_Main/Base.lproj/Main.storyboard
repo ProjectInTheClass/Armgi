@@ -163,8 +163,32 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="알림시간" id="Qxd-np-UUw">
                                 <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="44" id="i3U-O2-FoK">
+                                        <rect key="frame" x="0.0" y="632" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="i3U-O2-FoK" id="EL4-0U-ObN">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mZ6-ZR-a7N">
+                                                    <rect key="frame" x="312" y="6" width="49" height="31"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <connections>
+                                                        <action selector="alarmWork:" destination="E0i-Jy-AXk" eventType="valueChanged" id="e7S-Le-PEk"/>
+                                                    </connections>
+                                                </switch>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="알림" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tGz-ug-RLh">
+                                                    <rect key="frame" x="16" y="11" width="30" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="200" id="wAX-2K-ceH">
-                                        <rect key="frame" x="0.0" y="632" width="375" height="200"/>
+                                        <rect key="frame" x="0.0" y="676" width="375" height="200"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wAX-2K-ceH" id="y4o-5I-YU9">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="199.5"/>
@@ -192,7 +216,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" editingAccessoryType="disclosureIndicator" textLabel="93Q-aM-JHh" detailTextLabel="Ii0-wU-u6Z" rowHeight="44" style="IBUITableViewCellStyleValue1" id="ZJu-RX-Q04">
-                                        <rect key="frame" x="0.0" y="832" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="876" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZJu-RX-Q04" id="duh-Sr-J5i">
                                             <rect key="frame" x="0.0" y="0.0" width="341" height="43.5"/>
@@ -242,6 +266,7 @@
                     </navigationItem>
                     <size key="freeformSize" width="375" height="1000"/>
                     <connections>
+                        <outlet property="alarmSwitch" destination="mZ6-ZR-a7N" id="F8f-WF-Sj2"/>
                         <outlet property="collectionView" destination="4Ym-mW-RR6" id="Fqv-V9-U4c"/>
                         <outlet property="endDatePicker" destination="zPL-b9-Kgm" id="4QX-67-ElO"/>
                         <outlet property="goalValueLabel" destination="fEW-ap-5Qh" id="FPV-qR-VZv"/>
@@ -1234,17 +1259,11 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Hh-ch-agu">
-                                                    <rect key="frame" x="347" y="16.5" width="13" height="11"/>
-                                                </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="5Hh-ch-agu" firstAttribute="top" secondItem="Zqq-yl-pd6" secondAttribute="top" constant="16.5" id="CTd-Sa-2Js"/>
                                                 <constraint firstItem="fga-ld-quP" firstAttribute="top" secondItem="Zqq-yl-pd6" secondAttribute="topMargin" id="JCe-pm-bz8"/>
                                                 <constraint firstItem="fga-ld-quP" firstAttribute="trailingMargin" relation="lessThanOrEqual" secondItem="Zqq-yl-pd6" secondAttribute="trailing" id="RR0-dk-8QF"/>
                                                 <constraint firstItem="fga-ld-quP" firstAttribute="bottom" secondItem="Zqq-yl-pd6" secondAttribute="bottomMargin" constant="-1" id="b1C-IW-YYn"/>
-                                                <constraint firstItem="5Hh-ch-agu" firstAttribute="trailing" secondItem="Zqq-yl-pd6" secondAttribute="trailing" constant="-15" id="btc-cJ-Hag"/>
-                                                <constraint firstItem="5Hh-ch-agu" firstAttribute="bottom" secondItem="Zqq-yl-pd6" secondAttribute="bottom" constant="-16" id="dfU-6R-6hx"/>
                                                 <constraint firstItem="fga-ld-quP" firstAttribute="leading" secondItem="Zqq-yl-pd6" secondAttribute="leadingMargin" id="yOt-GQ-Pmh"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -1295,18 +1314,12 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmarkoff" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b5b-O4-CkZ">
-                                                    <rect key="frame" x="347" y="16.5" width="13" height="11"/>
-                                                </imageView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="Jye-Mn-JcK" firstAttribute="top" secondItem="ueN-Go-OqW" secondAttribute="topMargin" id="7HY-dn-MGw"/>
                                                 <constraint firstItem="Jye-Mn-JcK" firstAttribute="bottom" secondItem="ueN-Go-OqW" secondAttribute="bottomMargin" constant="-1" id="B2J-fd-SyC"/>
-                                                <constraint firstItem="b5b-O4-CkZ" firstAttribute="top" secondItem="ueN-Go-OqW" secondAttribute="top" constant="16.5" id="FlH-DB-HUB"/>
-                                                <constraint firstItem="b5b-O4-CkZ" firstAttribute="bottom" secondItem="ueN-Go-OqW" secondAttribute="bottom" constant="-16" id="IhI-ZT-nDV"/>
                                                 <constraint firstItem="Jye-Mn-JcK" firstAttribute="leading" secondItem="ueN-Go-OqW" secondAttribute="leadingMargin" id="Ygu-Ot-oX0"/>
                                                 <constraint firstItem="Jye-Mn-JcK" firstAttribute="trailingMargin" relation="lessThanOrEqual" secondItem="ueN-Go-OqW" secondAttribute="trailing" id="ZZK-Ir-cE0"/>
-                                                <constraint firstItem="b5b-O4-CkZ" firstAttribute="trailing" secondItem="ueN-Go-OqW" secondAttribute="trailing" constant="-15" id="dtB-N4-qQM"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -1340,9 +1353,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="설정" id="QLy-2T-b1y"/>
                     <connections>
-                        <outlet property="forgettingCurveCheck" destination="b5b-O4-CkZ" id="Ufz-SZ-fQR"/>
                         <outlet property="forgettingCurveMode" destination="Y8E-Q6-hSV" id="n4f-t2-6PY"/>
-                        <outlet property="userCheck" destination="5Hh-ch-agu" id="Yqj-5n-IOz"/>
                         <outlet property="userSettingMode" destination="HcG-nF-5vO" id="Acf-ff-x0R"/>
                     </connections>
                 </tableViewController>
@@ -1431,18 +1442,12 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmarkoff" translatesAutoresizingMaskIntoConstraints="NO" id="uqh-0X-mtr">
-                                                    <rect key="frame" x="350" y="16.5" width="13" height="11"/>
-                                                </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="uqh-0X-mtr" firstAttribute="bottom" secondItem="Hco-9r-MEh" secondAttribute="bottom" constant="-16" id="JbG-s7-re7"/>
                                                 <constraint firstItem="pNW-8Y-anO" firstAttribute="top" secondItem="Hco-9r-MEh" secondAttribute="topMargin" id="LDx-TJ-47j"/>
                                                 <constraint firstItem="pNW-8Y-anO" firstAttribute="leading" secondItem="Hco-9r-MEh" secondAttribute="leadingMargin" id="LOL-9b-hmv"/>
-                                                <constraint firstItem="uqh-0X-mtr" firstAttribute="top" secondItem="Hco-9r-MEh" secondAttribute="top" constant="16.5" id="Na7-Fp-PTD"/>
                                                 <constraint firstItem="pNW-8Y-anO" firstAttribute="trailingMargin" relation="lessThanOrEqual" secondItem="Hco-9r-MEh" secondAttribute="trailing" id="Quk-AR-A1F"/>
                                                 <constraint firstItem="pNW-8Y-anO" firstAttribute="bottom" secondItem="Hco-9r-MEh" secondAttribute="bottomMargin" constant="-1" id="j2M-n1-WAP"/>
-                                                <constraint firstItem="uqh-0X-mtr" firstAttribute="trailing" secondItem="Hco-9r-MEh" secondAttribute="trailing" constant="-12" id="n6s-9e-koK"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -1459,15 +1464,9 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmarkoff" translatesAutoresizingMaskIntoConstraints="NO" id="aC4-Mz-f7D">
-                                                    <rect key="frame" x="350" y="16.5" width="13" height="11"/>
-                                                </imageView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="LSy-Sz-0eP" firstAttribute="bottom" secondItem="M3J-w7-VBS" secondAttribute="bottomMargin" constant="-1" id="2pX-5l-Lj5"/>
-                                                <constraint firstItem="aC4-Mz-f7D" firstAttribute="bottom" secondItem="M3J-w7-VBS" secondAttribute="bottom" constant="-16" id="3rE-A3-mXm"/>
-                                                <constraint firstItem="aC4-Mz-f7D" firstAttribute="top" secondItem="M3J-w7-VBS" secondAttribute="top" constant="16.5" id="94T-9g-76u"/>
-                                                <constraint firstItem="aC4-Mz-f7D" firstAttribute="trailing" secondItem="M3J-w7-VBS" secondAttribute="trailing" constant="-12" id="9ag-wj-A2A"/>
                                                 <constraint firstItem="LSy-Sz-0eP" firstAttribute="leading" secondItem="M3J-w7-VBS" secondAttribute="leadingMargin" id="IK9-vD-rPE"/>
                                                 <constraint firstItem="LSy-Sz-0eP" firstAttribute="trailingMargin" relation="lessThanOrEqual" secondItem="M3J-w7-VBS" secondAttribute="trailing" id="L0T-Yk-qsp"/>
                                                 <constraint firstItem="LSy-Sz-0eP" firstAttribute="top" secondItem="M3J-w7-VBS" secondAttribute="topMargin" id="mTi-N8-19W"/>
@@ -1506,9 +1505,7 @@
                     <navigationItem key="navigationItem" title="사용자 입력" id="ltF-Ba-yVp"/>
                     <connections>
                         <outlet property="starMemory" destination="rsd-Ev-vwp" id="niY-Ib-YaZ"/>
-                        <outlet property="starMemoryCheck" destination="uqh-0X-mtr" id="w8v-zF-Vep"/>
                         <outlet property="theIncorrect" destination="peV-0M-pZw" id="ICl-NA-iac"/>
-                        <outlet property="theIncorrectCheck" destination="aC4-Mz-f7D" id="Hud-yI-lnY"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NH3-YB-UHV" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2297,8 +2294,6 @@
         <image name="backButton" width="140" height="299"/>
         <image name="blank" width="256" height="256"/>
         <image name="blankstar" width="32" height="32"/>
-        <image name="checkmark" width="13" height="11"/>
-        <image name="checkmarkoff" width="13" height="11"/>
         <image name="finish" width="512" height="512"/>
         <image name="gear" width="32" height="32"/>
         <image name="list" width="32" height="32"/>

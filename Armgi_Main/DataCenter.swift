@@ -21,7 +21,7 @@ class DataCenter: NSObject, NSCoding{
     var templateColor:[String]
     
     var alarmOnOff:[Bool]
-    var alarmData:AlarmData
+    var alarmData:[AlarmData]
 
     override init() {
         self.studyList = []
@@ -34,7 +34,7 @@ class DataCenter: NSObject, NSCoding{
         //순서대로 파란색,초록색,노란색,빨간색
         
         self.alarmOnOff = []
-        self.alarmData = AlarmData()
+        self.alarmData = []
     }
 
     public func encode(with aCoder: NSCoder) {
@@ -84,10 +84,10 @@ class DataCenter: NSObject, NSCoding{
         } else {
             self.alarmOnOff = []
         }
-        if let alarmData = aDecoder.decodeObject(forKey: "alarmData") as? AlarmData {
+        if let alarmData = aDecoder.decodeObject(forKey: "alarmData") as? [AlarmData] {
             self.alarmData = alarmData
         } else {
-            self.alarmData = AlarmData()
+            self.alarmData = []
         }
     }
 }

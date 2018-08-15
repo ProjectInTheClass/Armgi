@@ -93,6 +93,16 @@ class AddTableViewController: UITableViewController, UITextFieldDelegate, UIColl
     }
     
     //알람
+    
+    @IBOutlet weak var alarmSwitch: UISwitch!
+    @IBAction func alarmWork(_ sender: UISwitch) {
+        if sender.isOn {
+            alarmSwitch.isOn = true
+        } else {
+            alarmSwitch.isOn = false
+        }
+    }
+    
     @IBOutlet weak var timePicker: UIDatePicker!
     
     var repeatWeekdays:[Int] = []
@@ -122,16 +132,20 @@ class AddTableViewController: UITableViewController, UITextFieldDelegate, UIColl
                 dataCenter.selectedColor.append(collectionViewCellCurrent)
                 dataCenter.goalData.currentGoalVal.append(Float(0))
                 
+                dataCenter.alarmOnOff.append(alarmSwitch.isOn)
+                let createAlarmData = AlarmData()
+                
                 let calendar = Calendar.current
                 let components = calendar.dateComponents([.hour, .minute], from: timePicker.date)
                 let pickedHour = components.hour
                 let pickedMinute = components.minute
                 if let hour = pickedHour, let minute = pickedMinute {
-                    dataCenter.alarmData.alarmHour = hour
-                    dataCenter.alarmData.alarmMinutes = minute
+                    createAlarmData.alarmHour = hour
+                    createAlarmData.alarmMinutes = minute
                 }
+                createAlarmData.repeatedWeekdays.append(Int(0))
                 
-                dataCenter.alarmData.repeatedWeekdays.append(Int(0))
+                dataCenter.alarmData.append(createAlarmData)
 
                 self.dismiss(animated: true, completion: nil)
             }
